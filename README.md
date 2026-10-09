@@ -46,8 +46,16 @@ Unit/API tests ใช้ mocks ที่ระบุในไฟล์ Integrati
 
 ## เอกสาร
 
-- [Architecture](docs/architecture.md), [Architecture Diagram](docs/diagrams/architecture.mmd)
-- [DFD Level 0](docs/diagrams/dfd-level-0.mmd), [ER Diagram](docs/diagrams/er.mmd)
+### Diagrams สำหรับส่ง Synerry
+
+- [Architecture Diagram (SVG)](docs/diagrams/architecture.svg) · [Mermaid Source](docs/diagrams/architecture.mmd) · [Architecture Explanation](docs/architecture.md)
+- [DFD Level 0 (PNG)](docs/diagrams/dfd-level-0.png) · [SVG](docs/diagrams/dfd-level-0.svg) · [Mermaid Source](docs/diagrams/dfd-level-0.mmd)
+- [ER Diagram (PNG)](docs/diagrams/er.png) · [SVG](docs/diagrams/er.svg) · [Mermaid Source](docs/diagrams/er.mmd)
+
+![Short URL Microservices Architecture](docs/diagrams/architecture.svg)
+
+- [DFD Level 0 preview](docs/diagrams/dfd-level-0.png)
+- [ER Diagram preview](docs/diagrams/er.png)
 - [API](docs/api.md), [อ่านโค้ด](docs/learning-guide.md)
 - [สิ่งที่เปลี่ยนเมื่อใช้ PostgreSQL](docs/postgres-changes.md)
 - [ผลตรวจ PostgreSQL/Vercel](docs/postgres-verification.md)
