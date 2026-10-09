@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CreateForm } from "../components/CreateForm";
 import { History } from "../components/History";
 import { Analytics } from "../components/Analytics";
+import { ShortUrlHero } from "../components/ShortUrlHero";
 import type { User } from "../types/api";
 export function Dashboard({ user }: { user: User }) {
   const [refresh, setRefresh] = useState(0);
@@ -17,6 +18,7 @@ export function Dashboard({ user }: { user: User }) {
           สวัสดี {user.name} · จัดการลิงก์และติดตามผลได้ในที่เดียว
         </p>
       </div>
+      <ShortUrlHero headingLevel="h2" />
       <CreateForm authenticated onCreated={() => setRefresh(refresh + 1)} />
       <Analytics refresh={refresh} showSummary />
       <History
