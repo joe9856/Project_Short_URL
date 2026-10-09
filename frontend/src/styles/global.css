@@ -104,6 +104,18 @@ body {
 .history-row .status {
   justify-self: start;
 }
+.history-status-control {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+.history-status-control .btn {
+  padding: 8px 10px;
+}
+.history-status-control .btn svg {
+  flex-shrink: 0;
+}
 .history-label {
   background: var(--color-surface-muted);
   padding: 12px;

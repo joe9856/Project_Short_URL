@@ -33,7 +33,10 @@ test("Register → login → create → QR → redirect → stats → disable �
     .getAttribute("href");
   expect(shortUrl).toBeTruthy();
   expect(new URL(shortUrl!).pathname).toBe("/" + alias);
-  const legacy = await context.request.head(new URL("/s/" + alias, shortUrl!).href, { maxRedirects: 0 });
+  const legacy = await context.request.head(
+    new URL("/s/" + alias, shortUrl!).href,
+    { maxRedirects: 0 },
+  );
   expect(legacy.status()).toBe(302);
   expect(legacy.headers().location).toBe("https://example.com/e2e?x=1#part");
   for (const format of ["PNG", "SVG"]) {
@@ -82,6 +85,71 @@ test("Register → login → create → QR → redirect → stats → disable �
   await expect(
     page.locator(".link-row").getByText("ปิดใช้งาน", { exact: true }),
   ).toBeVisible();
+  const historyRow = page.locator(".link-row");
+  const enableLink = historyRow.getByRole("button", {
+    name: "เปิดใช้งานลิงก์ " + alias,
+    exact: true,
+  });
+  // การบันทึกล้มเหลวต้องคงรายการและสถานะเดิมไว้ให้ลองใหม่ได้
+  await page.route(
+    "**/api/links/*",
+    async (route) => {
+      if (route.request().method() !== "PATCH") return route.fallback();
+      await route.fulfill({
+        status: 503,
+        contentType: "application/json",
+        body: JSON.stringify({ error: { message: "บริการทดสอบไม่พร้อม" } }),
+      });
+    },
+    { times: 1 },
+  );
+  await enableLink.click();
+  await expect(page.getByRole("alert")).toContainText("บันทึกสถานะลิงก์");
+  await expect(
+    historyRow.getByText("ปิดใช้งาน", { exact: true }),
+  ).toBeVisible();
+  await expect(enableLink).toBeEnabled();
+  await enableLink.click();
+  await expect(
+    page
+      .getByRole("status")
+      .filter({ hasText: "เปิดใช้งานลิงก์ " + alias + " แล้ว" }),
+  ).toBeVisible();
+  await expect(
+    historyRow.getByText("ใช้งานอยู่", { exact: true }),
+  ).toBeVisible();
+  await expect(page.getByRole("alert")).toHaveCount(0);
+  const restored = await context.request.head(shortUrl!, { maxRedirects: 0 });
+  expect(restored.status()).toBe(302);
+  expect(restored.headers().location).toBe("https://example.com/e2e?x=1#part");
+  await expect(historyRow.locator(".click-count")).toContainText("1");
+  // เมื่อสถานะไม่ตรงตัวกรอง ต้องนำรายการออกและคำนวณจำนวนรายการใหม่
+  await page.getByLabel("สถานะลิงก์").selectOption("active");
+  await expect(
+    historyRow.getByText("ใช้งานอยู่", { exact: true }),
+  ).toBeVisible();
+  await historyRow
+    .getByRole("button", {
+      name: "ปิดใช้งานลิงก์ " + alias,
+      exact: true,
+    })
+    .click();
+  await expect(
+    page
+      .getByRole("status")
+      .filter({ hasText: "ปิดใช้งานลิงก์ " + alias + " แล้ว" }),
+  ).toBeVisible();
+  await expect(historyRow).toHaveCount(0);
+  await expect(page.locator(".pagination")).toContainText("0 ลิงก์");
+  const disabledAgain = await context.request.get(shortUrl!, {
+    maxRedirects: 0,
+  });
+  expect(disabledAgain.status()).toBe(410);
+  await page.getByLabel("สถานะลิงก์").selectOption("disabled");
+  await expect(
+    historyRow.getByText("ปิดใช้งาน", { exact: true }),
+  ).toBeVisible();
+  await expect(historyRow.locator(".click-count")).toContainText("1");
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
@@ -91,7 +159,54 @@ test("Register → login → create → QR → redirect → stats → disable �
     path: "test-results/" + testInfo.project.name + "-history.png",
     fullPage: true,
   });
+  await page.goto("/dashboard");
+  const activeLinks = page
+    .locator(".summary-card")
+    .filter({ hasText: "ลิงก์ที่ใช้งาน" })
+    .locator("strong");
+  await expect(activeLinks).toHaveText("0");
+  await page
+    .getByRole("button", { name: "เปิดใช้งานลิงก์ " + alias, exact: true })
+    .click();
+  await expect(activeLinks).toHaveText("1");
+  await page
+    .getByRole("button", { name: "ปิดใช้งานลิงก์ " + alias, exact: true })
+    .click();
+  await expect(activeLinks).toHaveText("0");
+  // เปิดลิงก์ที่หมดอายุจากประวัติไม่ได้ ต้องแก้วันหมดอายุก่อน
+  const expiryAlias = "expiry-" + Date.now();
+  const expiresAt = new Date(Date.now() + 5000).toISOString();
+  const expiringResponse = await context.request.post("/api/links", {
+    headers: { Origin: "http://localhost:5173" },
+    data: { originalUrl: "https://example.com", alias: expiryAlias, expiresAt },
+  });
+  expect(expiringResponse.status()).toBe(201);
+  const { link: expiring } = await expiringResponse.json();
+  const disableExpiring = await context.request.patch(
+    "/api/links/" + expiring.id,
+    {
+      headers: { Origin: "http://localhost:5173" },
+      data: { isActive: false },
+    },
+  );
+  expect(disableExpiring.status()).toBe(200);
+  await expect
+    .poll(() => Date.now(), { timeout: 10000 })
+    .toBeGreaterThan(new Date(expiresAt).getTime());
+  await page.goto("/history");
+  await page.getByLabel("ค้นหาลิงก์").fill(expiryAlias);
+  await page.getByRole("button", { name: "ค้นหา", exact: true }).click();
+  await expect(page.locator(".link-row")).toHaveCount(1);
+  await expect(
+    page.getByRole("button", {
+      name: "เปิดใช้งานลิงก์ " + expiryAlias,
+      exact: true,
+    }),
+  ).toBeDisabled();
+  await page.getByRole("link", { name: "แก้วันหมดอายุ", exact: true }).click();
+  await expect(page).toHaveURL(new RegExp("/links/" + expiring.id + "$"));
   await page.getByRole("button", { name: "ออกจากระบบ" }).click();
+  await expect(page.getByRole("button", { name: "ออกจากระบบ" })).toHaveCount(0);
   await page.goto("/dashboard");
   await expect(page).toHaveURL(/login/);
   await page.getByLabel("อีเมล", { exact: true }).fill(alias + "@e2e.test");
@@ -99,6 +214,7 @@ test("Register → login → create → QR → redirect → stats → disable �
   await page.getByRole("button", { name: "เข้าสู่ระบบ", exact: true }).click();
   await expect(page).toHaveURL(/dashboard/);
   await page.getByRole("button", { name: "ออกจากระบบ" }).click();
+  await expect(page.getByRole("button", { name: "ออกจากระบบ" })).toHaveCount(0);
 });
 
 test("Home remains usable during an Auth outage and keyboard focus is visible", async ({

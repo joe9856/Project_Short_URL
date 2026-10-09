@@ -19,7 +19,10 @@ export function Dashboard({ user }: { user: User }) {
       </div>
       <CreateForm authenticated onCreated={() => setRefresh(refresh + 1)} />
       <Analytics refresh={refresh} showSummary />
-      <History refresh={refresh} />
+      <History
+        refresh={refresh}
+        onUpdated={() => setRefresh((value) => value + 1)}
+      />
     </>
   );
 }
