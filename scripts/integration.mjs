@@ -232,6 +232,13 @@ try {
   });
   await check("Create, duplicate aliases and validation", async () => {
     link = await create(cookie, { alias: "campaign" });
+    assert.equal(link.shortUrl, origin + "/campaign");
+    for (const alias of ["login", "LOGIN", "profile", "api", "assets"]) {
+      assert.equal((await request("/api/links", {
+        method: "POST", cookie,
+        body: { originalUrl: "https://example.com", alias },
+      })).status, 400);
+    }
     assert.equal(
       (
         await request("/api/links", {
@@ -300,8 +307,11 @@ try {
         assert.equal(bytes.subarray(0, 8).toString("hex"), "89504e470d0a1a0a");
       else assert.match(bytes.toString(), /<svg/);
     }
-    const response = await request("/s/" + link.code, { method: "HEAD" });
-    assert.equal(response.status, 302);
+    for (const path of ["/" + link.code, "/s/" + link.code]) {
+      const response = await request(path, { method: "HEAD" });
+      assert.equal(response.status, 302);
+      assert.equal(response.headers.get("location"), link.originalUrl);
+    }
     assert.equal(await clients.analytics.clickEvent.count(), 0);
   });
   await check(
@@ -309,7 +319,7 @@ try {
     async () => {
       const responses = await Promise.all(
         Array.from({ length: 20 }, () =>
-          request("/s/" + link.code, {
+          request("/" + link.code, {
             headers: {
               "user-agent": "Mobile iPhone",
               referer: "https://news.example.com/article",

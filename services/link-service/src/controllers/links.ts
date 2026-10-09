@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { z } from "zod";
+import { isReservedName } from "@short/routing";
 import * as service from "../services/links";
 import { codePattern, createSchema, updateSchema } from "../lib/validation";
 import { HttpError } from "../lib/http";
@@ -72,7 +73,7 @@ export async function qr(req: Request, res: Response) {
 }
 export async function redirect(req: Request, res: Response) {
   const code = String(req.params.code);
-  if (!codePattern.test(code))
+  if (!codePattern.test(code) || (req.route.path === "/:code" && isReservedName(code)))
     throw new HttpError(404, "NOT_FOUND", "ไม่พบลิงก์");
   const destination = await service.redirectDestination(
     code,

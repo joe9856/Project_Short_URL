@@ -2,6 +2,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import request from "supertest";
 import jsQR from "jsqr";
 import { PNG } from "pngjs";
+import { reservedNames } from "@short/routing";
 vi.mock("../src/lib/prisma", () => ({
   prisma: {
     link: {
@@ -20,6 +21,7 @@ import {
   redirectDestination,
   ownedLink,
   generateQr,
+  publicLink,
 } from "../src/services/links";
 import {
   createSchema,
@@ -66,6 +68,35 @@ describe("Link service", () => {
       codes.add(code);
     }
     expect(codes.size).toBe(1000);
+  });
+  it("rejects reserved aliases regardless of letter case", () => {
+    for (const name of reservedNames) {
+      for (const alias of [name, name.toUpperCase()]) {
+        expect(() => createSchema.parse({ originalUrl: link.originalUrl, alias })).toThrow();
+      }
+    }
+    expect(createSchema.parse({ originalUrl: link.originalUrl, alias: "login-123" }).alias).toBe("login-123");
+  });
+  it("serves root and legacy HEAD links without recording clicks", async () => {
+    const fetchMock = vi.fn();
+    vi.stubGlobal("fetch", fetchMock);
+    for (const path of ["/" + link.code, "/s/" + link.code]) {
+      const response = await request(app).head(path).set("x-internal-key", "unit-test-secret-only-not-for-deployment");
+      expect(response.status).toBe(302);
+      expect(response.headers.location).toBe(link.originalUrl);
+    }
+    expect(fetchMock).not.toHaveBeenCalled();
+    expect(publicLink(link).shortUrl).toBe("http://localhost:5173/" + link.code);
+  });
+  it("keeps reserved legacy links usable without taking over root page routes", async () => {
+    vi.mocked(prisma.link.findUnique).mockResolvedValue({ ...link, code: "Login" });
+    const response = await request(app).head("/s/Login").set("x-internal-key", "unit-test-secret-only-not-for-deployment");
+    expect(response.status).toBe(302);
+    expect(publicLink({ ...link, code: "Login" }).shortUrl).toBe("http://localhost:5173/s/Login");
+    vi.mocked(prisma.link.findUnique).mockClear();
+    const root = await request(app).head("/Login").set("x-internal-key", "unit-test-secret-only-not-for-deployment");
+    expect(root.status).toBe(404);
+    expect(prisma.link.findUnique).not.toHaveBeenCalled();
   });
   it("retries generated collisions and rejects duplicate aliases", async () => {
     vi.mocked(prisma.link.create)
@@ -165,7 +196,7 @@ describe("Link service", () => {
       decoded.width,
       decoded.height,
     );
-    expect(result?.data).toBe("http://localhost:5173/s/" + link.code);
+    expect(result?.data).toBe("http://localhost:5173/" + link.code);
     for (let index = 0; index < decoded.width * 20 * 4; index += 4)
       expect(decoded.data[index]).toBe(255);
   });

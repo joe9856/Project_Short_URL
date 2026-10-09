@@ -82,7 +82,9 @@ Auth/Link/Analytics เพิ่ม DATABASE_URL และ DIRECT_URL ของ�
 npm run vercel:gateway -- https://YOUR-GATEWAY.vercel.app
 ```
 
-คำสั่งแก้ frontend/vercel.json ให้ /api/* และ /s/* ไป Gateway หน้าอื่นไป index.html ค่า `configure-gateway.example` ที่เตรียมไว้ยังใช้งานจริงไม่ได้ Commit ค่าที่แก้แล้ว redeploy Frontend
+คำสั่งแก้ frontend/vercel.json ให้ /api/*, ลิงก์ใหม่ /:code และลิงก์เก่า /s/* ไป Gateway เส้นทางหน้าจอและไฟล์เว็บไม่ถูกส่งเป็นลิงก์สั้น หน้าอื่นไป index.html Commit ค่าที่แก้แล้ว redeploy Frontend
+
+ชื่อสงวนอยู่ใน `packages/routing/index.js` ใช้ร่วมกันระหว่าง Frontend, Gateway และ Link Service เช่น login/register/profile/api/assets ไม่สามารถสร้าง alias ตรงกับชื่อเหล่านี้ได้ รวมตัวพิมพ์ใหญ่/เล็ก หากเพิ่มหน้าจอที่ root ให้เพิ่มชื่อในรายการนี้ แล้วรัน `npm run vercel:gateway -- https://YOUR-GATEWAY.vercel.app` อีกครั้งเพื่อปรับ rewrite ด้วย หากใช้ Docker ให้รัน `node scripts/configure-nginx.mjs` เพื่อปรับไฟล์ Nginx ที่เก็บใน repo ด้วย (Docker build สร้างไฟล์จากรายการปัจจุบันให้อัตโนมัติ) ลิงก์เก่ารูปแบบ /s/:code ยังเปิดได้ และ alias เก่าที่ชนชื่อสงวนจะแสดง URL แบบ /s/:code ต่อไป
 
 Browser เรียก API บน frontend domain เดียวกัน cookie session จึงอยู่ frontend domain ไม่ต้องเพิ่ม CORS หรือเก็บ token ใน localStorage Short URL/QR ใช้ APP_URL ของ frontend จึงต้องตรงกับ URL ที่ส่งผู้ตรวจ
 

@@ -12,6 +12,7 @@
     "test": "vitest run --config ../../vitest.config.ts services/link-service/tests"
   },
   "dependencies": {
+    "@short/routing": "1.0.0",
     "express": "5.1.0",
     "helmet": "8.1.0",
     "dotenv": "17.2.3",

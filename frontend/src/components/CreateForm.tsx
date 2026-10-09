@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { FormEvent } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Link2 } from "lucide-react";
+import { isReservedName } from "@short/routing";
 import { api, errorText } from "../services/api";
 import type { ShortLink } from "../types/api";
 import { Feedback } from "./Feedback";
@@ -24,6 +25,8 @@ export function CreateForm({
     setLoading(true);
     setError("");
     try {
+      if (alias && isReservedName(alias))
+        throw new Error("ชื่อนี้ระบบใช้แล้ว กรุณาเลือกชื่ออื่น");
       const url = new URL(originalUrl);
       if (
         !["https:", "http:"].includes(url.protocol) ||

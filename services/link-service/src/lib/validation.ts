@@ -1,6 +1,7 @@
 import { randomInt } from "node:crypto";
 import { z } from "zod";
-export const codePattern = /^[A-Za-z0-9_-]{3,32}$/;
+import { codePattern, isReservedName } from "@short/routing";
+export { codePattern } from "@short/routing";
 export function validDestination(value: string) {
   try {
     const url = new URL(value);
@@ -23,6 +24,7 @@ export const createSchema = z
     alias: z
       .string()
       .regex(codePattern, "Alias ต้องมี 3–32 ตัวอักษร A-Z a-z 0-9 _ -")
+      .refine((alias) => !isReservedName(alias), "ชื่อนี้ระบบใช้แล้ว กรุณาเลือกชื่ออื่น")
       .optional(),
     expiresAt: z
       .string()
@@ -52,8 +54,11 @@ export const updateSchema = z
 export function generateCode() {
   const alphabet =
     "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  let code = "";
-  for (let i = 0; i < 8; i++) code += alphabet[randomInt(alphabet.length)];
+  let code: string;
+  do {
+    code = "";
+    for (let i = 0; i < 8; i++) code += alphabet[randomInt(alphabet.length)];
+  } while (isReservedName(code));
   return code;
 }
 export function linkUnavailable(link: {

@@ -16,3 +16,5 @@ router.get("/api/links", controller.list);
 router.get("/api/links/:id/qr", controller.qr);
 router.get("/api/links/:id", controller.detail);
 router.patch("/api/links/:id", controller.update);
+// วางหลัง routes ของระบบ และเก็บ /s/:code เดิมไว้รองรับลิงก์เก่า
+router.get("/:code", controller.redirect);

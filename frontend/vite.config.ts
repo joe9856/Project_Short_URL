@@ -1,3 +1,20 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-export default defineConfig({plugins:[react()],build:{rollupOptions:{output:{manualChunks:{charts:['recharts']}}}},server:{port:5173,strictPort:true,proxy:{'/api/':{target:'http://127.0.0.1:3000',changeOrigin:false},'/s/':{target:'http://127.0.0.1:3000',changeOrigin:false}}}});
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import { rootShortLinkPattern } from "@short/routing";
+
+export default defineConfig({
+  plugins: [react()],
+  build: { rollupOptions: { output: { manualChunks: { charts: ["recharts"] } } } },
+  server: {
+    port: 5173,
+    strictPort: true,
+    proxy: {
+      "/api/": { target: "http://127.0.0.1:3000", changeOrigin: false },
+      "/s/": { target: "http://127.0.0.1:3000", changeOrigin: false },
+      [`^/${rootShortLinkPattern}/?(?:\\?.*)?$`]: {
+        target: "http://127.0.0.1:3000",
+        changeOrigin: false,
+      },
+    },
+  },
+});

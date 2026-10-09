@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import helmet from "helmet";
 import { rateLimit } from "express-rate-limit";
+import { isShortLinkPath } from "@short/routing";
 import { guards, verifySession } from "./middlewares/guards";
 import { serviceProxy } from "./routes/proxy";
 export function createGateway() {
@@ -47,7 +48,8 @@ export function createGateway() {
       (path) =>
         path === "/api/links" ||
         path.startsWith("/api/links/") ||
-        path.startsWith("/s/"),
+        path.startsWith("/s/") ||
+        isShortLinkPath(path),
     ),
   );
   app.use((_req, res) =>

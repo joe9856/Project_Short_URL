@@ -1,0 +1,12 @@
+{
+  "name": "@short/routing",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "node --check index.js",
+    "typecheck": "node --check index.js"
+  }
+}

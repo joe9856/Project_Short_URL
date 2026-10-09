@@ -16,11 +16,12 @@ Browser ใช้ Gateway เท่านั้น; body JSON <=32 KiB; protecte
 | GET /api/links/:id/qr    | format png/svg; download=1 สำหรับ attachment                              | 200 image/png หรือ image/svg+xml; owner only                              |
 | GET /api/links/:id/stats | from?,to? YYYY-MM-DD                                                      | 200 `{stats}`; Auth + Link ownership                                      |
 | GET /api/stats           | from?,to? YYYY-MM-DD                                                      | 200 `{stats}` owner summary                                               |
-| GET /s/:code             | code                                                                      | 302 Location หลัง Analytics persist; 404/410/503                          |
-| HEAD /s/:code            | code                                                                      | 302 without click event                                                   |
+| GET /:code               | code (ไม่ใช่ชื่อสงวน)                                                       | 302 Location หลัง Analytics persist; 404/410/503                          |
+| HEAD /:code              | code (ไม่ใช่ชื่อสงวน)                                                       | 302 without click event                                                   |
+| GET /s/:code, HEAD /s/:code | code                                                                    | รองรับลิงก์เดิม; HEAD ไม่เพิ่มคลิก                                         |
 | GET /healthz             | none                                                                      | 200 `{status:"ok"}` shallow                                               |
 
-Link: id,userId,code,originalUrl,shortUrl,isActive,expiresAt,createdAt,updatedAt,status. Code case-sensitive จาก UNIQUE collation ใน migration. URL scheme เฉพาะ HTTP/HTTPS ไม่มี username/password รักษา query/fragment โดยไม่ fetch ปลายทาง
+Link: id,userId,code,originalUrl,shortUrl,isActive,expiresAt,createdAt,updatedAt,status. Code case-sensitive และมี UNIQUE constraint ใน PostgreSQL. Alias ใหม่ห้ามตรงกับชื่อสงวนใน packages/routing แม้ตัวพิมพ์ต่างกัน. URL scheme เฉพาะ HTTP/HTTPS ไม่มี username/password รักษา query/fragment โดยไม่ fetch ปลายทาง
 
 Stats: totalLinks,activeLinks,totalClicks,clicksByDate:[{date,clicks}],devices:[{name,clicks}],sources:[{name,clicks}],range:{from,to,timezone}. Summary counts links ทั้งหมด/current active; click counts จำกัดช่วงวันที่. Default ย้อนหลัง 30 วันรวมวันนี้. ช่วงวันที่ใช้ [00:00 Bangkok ของ from,00:00 Bangkok ของวันหลัง to); daily zero-filled; top 20 sources; clicks รวม bots และซ้ำ ไม่ใช่ unique people
 

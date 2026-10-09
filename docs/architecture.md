@@ -10,7 +10,7 @@ Supabase ใช้ instance เดียว แยก app_auth/app_links/app_ana
 
 1. Login: POST /api/auth/login → Gateway ตรวจ Origin → Auth ตรวจ password → เก็บ session hash → ส่ง cookie กลับ browser บน frontend domain
 2. Create: Gateway ตรวจ session กับ Auth → Link ตรวจ session/URL/alias → INSERT app_links.links → คืน Short URL ที่ขึ้นต้น APP_URL ของ frontend
-3. Redirect: GET /s/code → Link อ่านลิงก์ → ส่ง eventId ให้ Analytics → INSERT click_events และรับ acknowledgment → 302 ไป URL เดิม Retry ใช้ eventId เดิม HEAD ไม่บันทึกคลิก
+3. Redirect: GET /code → Link อ่านลิงก์ → ส่ง eventId ให้ Analytics → INSERT click_events และรับ acknowledgment → 302 ไป URL เดิม Retry ใช้ eventId เดิม HEAD ไม่บันทึกคลิก และ /s/code เดิมยังเปิดได้ ชื่อหน้าเว็บ/API ถูกสงวนไว้ไม่ให้สร้าง alias ชนกัน
 4. History: Link อ่านลิงก์ของผู้ใช้ → ขอ batch click counts จาก Analytics → คืนรายการพร้อมยอดคลิก
 5. Stats: Analytics ตรวจ session/ownership/summary ผ่าน Auth/Link → aggregate PostgreSQL ใน RepeatableRead snapshot → กราฟวันที่ไทย/device/source
 6. Profile: PATCH /api/auth/me → Auth อ่านผู้ใช้จาก session → แก้เฉพาะ name → frontend อัปเดตชื่อ

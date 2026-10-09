@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { randomUUID } from "node:crypto";
 import QRCode from "qrcode";
+import { shortLinkPath } from "@short/routing";
 import type { Link, Prisma } from "../../generated/client";
 import { prisma } from "../lib/prisma";
 import { config } from "../lib/config";
@@ -16,7 +17,7 @@ import {
 export function publicLink(link: Link) {
   return {
     ...link,
-    shortUrl: config.appUrl + "/s/" + link.code,
+    shortUrl: config.appUrl + shortLinkPath(link.code),
     status: linkUnavailable(link)
       ? link.isActive
         ? "expired"
@@ -145,7 +146,7 @@ export async function updateLink(
   });
 }
 export async function generateQr(link: Link, format: "png" | "svg") {
-  const shortUrl = config.appUrl + "/s/" + link.code;
+  const shortUrl = config.appUrl + shortLinkPath(link.code);
   const options = { margin: 4, width: 512, errorCorrectionLevel: "M" as const };
   if (format === "svg")
     return QRCode.toString(shortUrl, { ...options, type: "svg" });

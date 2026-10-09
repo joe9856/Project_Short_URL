@@ -14,7 +14,7 @@ sequenceDiagram
   L->>A: verify session again
   L->>L: UNIQUE code INSERT in owned DB
   L-->>UI: 201 link via Gateway
-  UI->>G: GET /s/code
+  UI->>G: GET /code (legacy /s/code)
   G->>L: public redirect
   L->>L: availability/expiry lookup
   L->>S: POST /internal/visits eventId

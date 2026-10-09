@@ -16,14 +16,26 @@ test("Register → login → create → QR → redirect → stats → disable �
   await expect(page).toHaveURL(/dashboard/);
   await page.getByLabel("URL ปลายทาง").fill("https://example.com/e2e?x=1#part");
   await page.getByText("ตั้งค่าชื่อลิงก์และวันหมดอายุ (ไม่บังคับ)").click();
+  await page.getByLabel("ชื่อที่กำหนดเอง").fill("LOGIN");
+  await page.getByRole("button", { name: "ย่อลิงก์", exact: true }).click();
+  await expect(page.getByRole("alert")).toContainText("ชื่อนี้ระบบใช้แล้ว");
+  const rejected = await context.request.post("/api/links", {
+    headers: { Origin: "http://localhost:5173" },
+    data: { originalUrl: "https://example.com", alias: "LOGIN" },
+  });
+  expect(rejected.status()).toBe(400);
   await page.getByLabel("ชื่อที่กำหนดเอง").fill(alias);
   await page.getByRole("button", { name: "ย่อลิงก์", exact: true }).click();
   const result = page.getByLabel("ลิงก์ที่สร้าง");
   await expect(result).toBeVisible();
   const shortUrl = await result
-    .getByRole("link", { name: new RegExp("/s/" + alias) })
+    .getByRole("link", { name: new RegExp("/" + alias) })
     .getAttribute("href");
   expect(shortUrl).toBeTruthy();
+  expect(new URL(shortUrl!).pathname).toBe("/" + alias);
+  const legacy = await context.request.head(new URL("/s/" + alias, shortUrl!).href, { maxRedirects: 0 });
+  expect(legacy.status()).toBe(302);
+  expect(legacy.headers().location).toBe("https://example.com/e2e?x=1#part");
   for (const format of ["PNG", "SVG"]) {
     const pending = page.waitForEvent("download");
     await result.getByRole("link", { name: format, exact: true }).click();

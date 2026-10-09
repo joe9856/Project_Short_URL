@@ -5,7 +5,8 @@
   "workspaces": [
     "frontend",
     "gateway",
-    "services/*"
+    "services/*",
+    "packages/*"
   ],
   "engines": {
     "node": ">=20.19"
