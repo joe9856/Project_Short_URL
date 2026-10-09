@@ -3,10 +3,18 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "main": "index.js",
+  "main": "index.cjs",
+  "module": "index.js",
   "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "import": "./index.js",
+      "require": "./index.cjs"
+    }
+  },
   "scripts": {
-    "build": "node --check index.js",
-    "typecheck": "node --check index.js"
+    "build": "node --check index.cjs && node --check index.js",
+    "typecheck": "node --check index.cjs && node --check index.js"
   }
 }

@@ -1,9 +1,33 @@
 import { readFileSync } from "node:fs";
+import { execFileSync } from "node:child_process";
 import { resolve } from "node:path";
 import { describe, it, expect } from "vitest";
 import { isReservedName, rootShortLinkPattern, rootShortLinkSource } from "@short/routing";
 
 describe("Frontend routing boundaries", () => {
+  it("loads the same routing rules in CommonJS and ESM without require(ESM) support", () => {
+    // Run outside Vitest's module transform to match older serverless runtimes.
+    const output = execFileSync(process.execPath, ["--no-experimental-require-module", "-e", `
+      const cjs = require("@short/routing");
+      import("@short/routing").then((esm) => {
+        const snapshot = (routing) => ({
+          exports: Object.keys(routing).sort(),
+          reservedNames: routing.reservedNames,
+          pattern: routing.rootShortLinkPattern,
+          source: routing.rootShortLinkSource,
+          codePattern: String(routing.codePattern),
+          reserved: routing.isReservedName("LOGIN"),
+          short: routing.isShortLinkPath("/AbC_123?source=qr"),
+          page: routing.isShortLinkPath("/login"),
+          paths: [routing.shortLinkPath("hello"), routing.shortLinkPath("login")],
+        });
+        process.stdout.write(JSON.stringify({ cjs: snapshot(cjs), esm: snapshot(esm) }));
+      }).catch((error) => { console.error(error); process.exitCode = 1; });
+    `], { cwd: resolve("gateway"), encoding: "utf8", windowsHide: true });
+    const { cjs, esm } = JSON.parse(output);
+    expect(cjs).toEqual(esm);
+    expect(cjs).toMatchObject({ reserved: true, short: true, page: false, paths: ["/hello", "/s/login"] });
+  });
   it("reserves every page declared by the frontend router", () => {
     const app = readFileSync(resolve("frontend/src/App.tsx"), "utf8");
     const pages = [...app.matchAll(/path="\/([^"/:*]+)/g)].map((match) => match[1]);

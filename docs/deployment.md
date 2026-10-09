@@ -84,9 +84,11 @@ npm run vercel:gateway -- https://YOUR-GATEWAY.vercel.app
 
 คำสั่งแก้ frontend/vercel.json ให้ /api/*, ลิงก์ใหม่ /:code และลิงก์เก่า /s/* ไป Gateway เส้นทางหน้าจอและไฟล์เว็บไม่ถูกส่งเป็นลิงก์สั้น หน้าอื่นไป index.html Commit ค่าที่แก้แล้ว redeploy Frontend
 
-ชื่อสงวนอยู่ใน `packages/routing/index.js` ใช้ร่วมกันระหว่าง Frontend, Gateway และ Link Service เช่น login/register/profile/api/assets ไม่สามารถสร้าง alias ตรงกับชื่อเหล่านี้ได้ รวมตัวพิมพ์ใหญ่/เล็ก หากเพิ่มหน้าจอที่ root ให้เพิ่มชื่อในรายการนี้ แล้วรัน `npm run vercel:gateway -- https://YOUR-GATEWAY.vercel.app` อีกครั้งเพื่อปรับ rewrite ด้วย หากใช้ Docker ให้รัน `node scripts/configure-nginx.mjs` เพื่อปรับไฟล์ Nginx ที่เก็บใน repo ด้วย (Docker build สร้างไฟล์จากรายการปัจจุบันให้อัตโนมัติ) ลิงก์เก่ารูปแบบ /s/:code ยังเปิดได้ และ alias เก่าที่ชนชื่อสงวนจะแสดง URL แบบ /s/:code ต่อไป
+ชื่อสงวนอยู่ใน `packages/routing/index.cjs` ใช้ร่วมกันระหว่าง Frontend, Gateway และ Link Service เช่น login/register/profile/api/assets ไม่สามารถสร้าง alias ตรงกับชื่อเหล่านี้ได้ รวมตัวพิมพ์ใหญ่/เล็ก หากเพิ่มหน้าจอที่ root ให้เพิ่มชื่อในรายการนี้ แล้วรัน `npm run vercel:gateway -- https://YOUR-GATEWAY.vercel.app` อีกครั้งเพื่อปรับ rewrite ด้วย หากใช้ Docker ให้รัน `node scripts/configure-nginx.mjs` เพื่อปรับไฟล์ Nginx ที่เก็บใน repo ด้วย (Docker build สร้างไฟล์จากรายการปัจจุบันให้อัตโนมัติ) ลิงก์เก่ารูปแบบ /s/:code ยังเปิดได้ และ alias เก่าที่ชนชื่อสงวนจะแสดง URL แบบ /s/:code ต่อไป
 
 Browser เรียก API บน frontend domain เดียวกัน cookie session จึงอยู่ frontend domain ไม่ต้องเพิ่ม CORS หรือเก็บ token ใน localStorage Short URL/QR ใช้ APP_URL ของ frontend จึงต้องตรงกับ URL ที่ส่งผู้ตรวจ
+
+แพ็กเกจ `@short/routing` รองรับทั้ง CommonJS (`require`) ของ Gateway/Link Service และ ES Module (`import`) ของ Frontend/สคริปต์ โดยใช้กฎจาก `index.cjs` ชุดเดียวกัน หาก Runtime Logs แจ้ง `ERR_REQUIRE_ESM` จากแพ็กเกจนี้ ให้ deploy commit ที่มี conditional exports ใน `packages/routing/package.json` ใหม่บน Gateway, Link Service และ Frontend; ไม่ต้องแก้ฐานข้อมูล
 
 ## 6. ทดสอบ URL จริง
 

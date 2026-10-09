@@ -4,7 +4,11 @@ import { rootShortLinkPattern } from "@short/routing";
 
 export default defineConfig({
   plugins: [react()],
-  build: { rollupOptions: { output: { manualChunks: { charts: ["recharts"] } } } },
+  optimizeDeps: { include: ["@short/routing"] },
+  build: {
+    commonjsOptions: { include: [/node_modules/, /packages[\\/]routing/] },
+    rollupOptions: { output: { manualChunks: { charts: ["recharts"] } } },
+  },
   server: {
     port: 5173,
     strictPort: true,
