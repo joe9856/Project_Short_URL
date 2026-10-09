@@ -45,6 +45,8 @@ Migrations ใหม่สร้างตาราง PostgreSQL ในพื้
 
 Import repository เดียวกัน 5 ครั้ง เปิด **Include source files outside of the Root Directory in the Build Step** สำหรับ npm workspaces ตั้ง Node.js **22.x** และติดตั้ง development dependencies เพื่อใช้ Prisma CLI/TypeScript
 
+ทุก project ตั้ง `installCommand` ใน `vercel.json` เป็น `npm ci --include=dev` เพื่อให้เครื่องมือ build ติดตั้งแม้มี `NODE_ENV=production` และแต่ละ workspace ระบุ TypeScript/Node types ของตัวเอง ไม่พึ่ง devDependencies ของ repository root หากพบ `tsc: command not found` ให้ตรวจว่า deployment ใช้ commit ที่มีการตั้งค่านี้แล้ว
+
 | Project | Root Directory | Framework | Build command |
 |---|---|---|---|
 | Frontend | `frontend` | Vite | `npm run build` |
