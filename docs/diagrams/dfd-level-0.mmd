@@ -1,0 +1,8 @@
+flowchart LR
+  User[ผู้ใช้งาน] -->|URL / settings / credentials| System((Short URL System))
+  Visitor[ผู้เปิดลิงก์] -->|GET short code| System
+  System -->|302 Location| Visitor
+  System -->|short URL / QR / statistics| User
+  System <--> AuthDB[(Auth owned data)]
+  System <--> LinkDB[(Link owned data)]
+  System <--> AnalyticsDB[(Analytics owned data)]

@@ -1,0 +1,28 @@
+{
+  "name": "@short/auth-service",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "generate": "prisma generate",
+    "migrate": "prisma migrate deploy",
+    "test": "vitest run --config ../../vitest.config.ts services/auth-service/tests"
+  },
+  "dependencies": {
+    "express": "5.1.0",
+    "helmet": "8.1.0",
+    "dotenv": "17.2.3",
+    "zod": "3.25.76",
+    "cookie": "1.0.2",
+    "@prisma/client": "6.19.3",
+    "argon2": "0.44.0"
+  },
+  "devDependencies": {
+    "prisma": "6.19.3",
+    "@types/express": "5.0.5",
+    "@types/qrcode": "1.5.6"
+  }
+}

@@ -1,0 +1,43 @@
+erDiagram
+  USERS ||--o{ SESSIONS : owns
+  USERS {
+    varchar id PK
+    varchar email UK
+    varchar name
+    varchar passwordHash
+    timestamptz createdAt
+  }
+  SESSIONS {
+    varchar tokenHash PK
+    varchar userId FK
+    timestamptz expiresAt
+  }
+  AUTH_RATE_LIMITS {
+    varchar id PK
+    int count
+    timestamptz expiresAt
+  }
+  LINKS {
+    varchar id PK
+    varchar userId
+    varchar code UK
+    text originalUrl
+    boolean isActive
+    timestamptz expiresAt
+    timestamptz createdAt
+    timestamptz updatedAt
+  }
+  LINK_RATE_LIMITS {
+    varchar id PK
+    int count
+    timestamptz expiresAt
+  }
+  CLICK_EVENTS {
+    varchar id PK
+    varchar eventId UK
+    varchar linkId
+    varchar ownerId
+    timestamptz clickedAt
+    varchar referrerHost
+    varchar deviceType
+  }

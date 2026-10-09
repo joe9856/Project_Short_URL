@@ -1,0 +1,22 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "../generated/client"
+  binaryTargets = ["native", "debian-openssl-3.0.x", "rhel-openssl-3.0.x"]
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+model ClickEvent {
+  id String @id @default(uuid()) @db.VarChar(36)
+  eventId String @unique @db.VarChar(36)
+  linkId String @db.VarChar(36)
+  ownerId String @db.VarChar(36)
+  clickedAt DateTime @db.Timestamptz(3)
+  referrerHost String @db.VarChar(253)
+  deviceType String @db.VarChar(16)
+  @@index([linkId, clickedAt])
+  @@index([ownerId, clickedAt])
+  @@map("click_events")
+}

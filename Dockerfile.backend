@@ -1,0 +1,15 @@
+FROM node:22-bookworm-slim
+RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+COPY package*.json ./
+COPY frontend/package.json frontend/package.json
+COPY gateway/package.json gateway/package.json
+COPY services/auth-service/package.json services/auth-service/package.json
+COPY services/link-service/package.json services/link-service/package.json
+COPY services/analytics-service/package.json services/analytics-service/package.json
+RUN npm ci --no-audit --no-fund
+COPY . .
+RUN DATABASE_URL=postgresql://unused:unused@localhost:5432/unused DIRECT_URL=postgresql://unused:unused@localhost:5432/unused npm run generate && npm run build
+ENV NODE_ENV=production
+USER node
+CMD ["npm", "start", "-w", "gateway"]

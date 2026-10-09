@@ -1,0 +1,19 @@
+erDiagram
+  USERS ||--o{ SESSIONS : owns
+  USERS {
+    varchar id PK
+    varchar email UK
+    varchar name
+    varchar passwordHash
+    timestamptz createdAt
+  }
+  SESSIONS {
+    varchar tokenHash PK
+    varchar userId FK
+    timestamptz expiresAt
+  }
+  AUTH_RATE_LIMITS {
+    varchar id PK
+    int count
+    timestamptz expiresAt
+  }

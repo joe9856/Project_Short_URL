@@ -1,0 +1,48 @@
+{
+  "name": "short-url-microservices",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "gateway",
+    "services/*"
+  ],
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n web,gateway,auth,links,analytics \"npm run dev -w frontend\" \"npm run dev -w gateway\" \"npm run dev -w services/auth-service\" \"npm run dev -w services/link-service\" \"npm run dev -w services/analytics-service\"",
+    "generate": "npm run generate --workspaces --if-present",
+    "migrate": "npm run migrate --workspaces --if-present",
+    "build": "npm run build --workspaces",
+    "typecheck": "npm run typecheck --workspaces",
+    "lint": "eslint \"frontend/src/**/*.{ts,tsx}\" \"gateway/src/**/*.ts\" \"services/*/src/**/*.ts\" \"tests/**/*.ts\" --ignore-pattern \"**/generated/**\"",
+    "test": "vitest run",
+    "test:integration": "node scripts/integration.mjs",
+    "test:e2e": "playwright test",
+    "setup": "node scripts/setup.mjs",
+    "verify": "npm run typecheck && npm run lint && npm test && npm run build",
+    "db:local": "node scripts/local-postgres.mjs",
+    "format": "prettier --write frontend/src gateway/src \"services/*/src/**/*.ts\" \"services/*/tests/**/*.ts\" tests scripts docs *.json *.ts *.yaml",
+    "db:stop": "node scripts/local-postgres.mjs --stop",
+    "vercel:gateway": "node scripts/configure-vercel.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1",
+    "@types/node": "22.19.0",
+    "@types/supertest": "6.0.3",
+    "concurrently": "9.2.1",
+    "eslint": "9.39.1",
+    "typescript-eslint": "8.46.4",
+    "supertest": "7.1.4",
+    "typescript": "5.9.3",
+    "vitest": "3.2.4",
+    "tsx": "4.20.6",
+    "mysql2": "3.15.3",
+    "dotenv": "17.2.3",
+    "prettier": "3.6.2",
+    "jsqr": "1.4.0",
+    "pngjs": "7.0.0",
+    "@types/pngjs": "6.0.5"
+  }
+}

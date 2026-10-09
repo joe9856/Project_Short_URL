@@ -1,0 +1,6 @@
+services:
+  auth: { environment: { NODE_ENV: production } }
+  links: { environment: { NODE_ENV: production } }
+  analytics: { environment: { NODE_ENV: production } }
+  gateway: { environment: { NODE_ENV: production } }
+  postgres: { ports: !reset [] }

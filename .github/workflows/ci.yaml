@@ -1,0 +1,22 @@
+name: checks
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22, cache: npm}
+      - run: npm ci
+      - run: npm run generate
+        env: {DATABASE_URL: "postgresql://unused:unused@localhost:5432/unused", DIRECT_URL: "postgresql://unused:unused@localhost:5432/unused"}
+      - run: npm run setup
+      - run: docker compose up -d --wait postgres
+      - run: npm run verify
+      - run: npm run test:integration
+      - run: npx playwright install --with-deps chromium
+      - run: npm run migrate
+      - run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: verification, path: "test-results/"}

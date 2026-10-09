@@ -1,0 +1,18 @@
+flowchart TB
+  U[Browser / QR scan] --> W[Frontend — Vercel / React]
+  W -->|same-origin /api and /s rewrites| G[Gateway — Vercel / Express]
+  G -->|HTTPS + internal secret| A[Auth Service — Vercel]
+  G -->|HTTPS + internal secret| L[Link Service — Vercel]
+  G -->|HTTPS + internal secret| T[Analytics Service — Vercel]
+  L -->|session verification| A
+  T -->|session verification| A
+  L -->|record clicks / batch counts| T
+  T -->|ownership / link summary| L
+  subgraph DB[One Supabase PostgreSQL instance]
+    AD[(app_auth schema)]
+    LD[(app_links schema)]
+    TD[(app_analytics schema)]
+  end
+  A -->|auth_owner / pooler| AD
+  L -->|links_owner / pooler| LD
+  T -->|analytics_owner / pooler| TD
