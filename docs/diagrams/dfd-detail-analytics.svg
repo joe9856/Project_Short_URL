@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1616" height="840" viewBox="0 0 1616 840" role="img" aria-labelledby="title"><title id="title">DFD Level 0 · แผ่น E — บันทึกและสรุปการเปิด</title>
+    <defs><marker id="send" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#2563b5"/></marker><marker id="return" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#087f78"/></marker></defs><rect width="100%" height="100%" fill="#fff"/><g font-family="Tahoma, sans-serif"><text x="40" y="53" font-size="28" fill="#152e49" font-weight="700">DFD Level 0 · แผ่น E — บันทึกและสรุปการเปิด</text><text x="40" y="90" font-size="19" fill="#5c718b" >Gane &amp; Sarson · ภาพส่วนหนึ่งของ Level 0 เดิม · สำเนาอ้างอิงใช้หมายเลขเดิม</text><g transform="translate(40,120)"><rect x="0" y="0" width="1536" height="644" rx="12" fill="#ffffff" stroke="#d8e2ee"/>
+    <text x="30" y="40" font-size="26" fill="#183451" font-weight="700">E  บันทึกและสรุปการเปิด</text>
+    <text x="30" y="74" font-size="17" fill="#657991" >eventId ป้องกันเหตุการณ์เดิมซ้ำ · รับคำขอสถิติจาก 6.0 ในแผ่น F</text>
+    <line x1="30" y1="92" x2="1505" y2="92" stroke="#e2e8f0"/><g data-node="P5"><rect x="620" y="120" width="220" height="450" rx="15" fill="#edf4ff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M620 167 H840" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="730" y="152" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">5.0</text>
+      <text x="730" y="347" font-size="25" fill="#193e66" text-anchor="middle" >บันทึกและสรุป</text><text x="730" y="384" font-size="25" fill="#193e66" text-anchor="middle" >การเปิดลิงก์</text>
+
+    </g><g data-node="P4"><rect x="30" y="283" width="208" height="140" rx="15" fill="#f8faff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M30 330 H238" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="134" y="315" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">4.0</text>
+      <text x="134" y="355" font-size="19" fill="#193e66" text-anchor="middle" >ตรวจลิงก์</text><text x="134" y="382" font-size="19" fill="#193e66" text-anchor="middle" >และส่งต่อ</text>
+      <text x="134" y="412" font-size="13" fill="#71839a" text-anchor="middle" >สำเนาอ้างอิง</text>
+    </g><g data-flow="L23" data-from="P4" data-to="P5">
+    <text x="256" y="292" font-size="13" fill="#2563b5" font-weight="700">L23</text>
+    <text x="304" y="292" font-size="18" fill="#2563b5" >eventId, linkId, ownerId, เวลา</text><text x="304" y="317" font-size="18" fill="#2563b5" >ชนิดอุปกรณ์ และแหล่งที่มา</text>
+    <path d="M238 335 H620" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L24" data-from="P5" data-to="P4">
+    <text x="256" y="352" font-size="13" fill="#087f78" font-weight="700">L24</text>
+    <text x="304" y="352" font-size="18" fill="#087f78" >ผลยืนยันบันทึกเหตุการณ์</text><text x="304" y="377" font-size="18" fill="#087f78" >หรือข้อผิดพลาดในการบันทึก</text>
+    <path d="M620 395 H238" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g><g data-node="D3"><rect x="1240" y="205" width="260" height="290" fill="#fff8e9"/>
+      <path d="M1500 205 H1240 V495 H1500 M1283 205 V495" fill="none" stroke="#ac7c2c" stroke-width="2"/>
+      <text x="1261" y="356" font-size="17" fill="#825b1b" text-anchor="middle" font-weight="700">D3</text>
+      <text x="1298" y="328" font-size="18" fill="#71511f" >ข้อมูลการเปิดลิงก์</text><text x="1298" y="357" font-size="18" fill="#71511f" >Analytics · app_analytics</text>
+      <text x="1298" y="384" font-size="13" fill="#8a6f42" >click_events</text>
+
+    </g><g data-flow="L25" data-from="P5" data-to="D3">
+    <text x="858" y="232" font-size="13" fill="#2563b5" font-weight="700">L25</text>
+    <text x="906" y="232" font-size="18" fill="#2563b5" >เหตุการณ์เปิดลิงก์</text><text x="906" y="257" font-size="18" fill="#2563b5" >พร้อม eventId ที่ใช้ป้องกันซ้ำ</text>
+    <path d="M840 275 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L26" data-from="P5" data-to="D3">
+    <text x="858" y="312" font-size="13" fill="#2563b5" font-weight="700">L26</text>
+    <text x="906" y="312" font-size="18" fill="#2563b5" >ownerId / linkId / ช่วงวันที่</text><text x="906" y="337" font-size="18" fill="#2563b5" >และเงื่อนไขสรุปสถิติ</text>
+    <path d="M840 355 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L27" data-from="D3" data-to="P5">
+    <text x="858" y="392" font-size="13" fill="#087f78" font-weight="700">L27</text>
+    <text x="906" y="392" font-size="18" fill="#087f78" >ผลบันทึก / เหตุการณ์ที่มีแล้ว</text><text x="906" y="417" font-size="18" fill="#087f78" >ยอดคลิก รายวัน อุปกรณ์ แหล่งที่มา</text>
+    <path d="M1240 435 H840" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g></g><text x="40" y="804" font-size="18" fill="#5c718b" >คำอธิบายทุกเส้น: docs/dfd.md · สีฟ้าไปทางขวา / สีเขียวไปทางซ้าย · อ่านตามหัวลูกศร</text></g></svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1616" height="840" viewBox="0 0 1616 840" role="img" aria-labelledby="title"><title id="title">DFD Level 0 · แผ่น A — บัญชีและการยืนยันตัวตน</title>
+    <defs><marker id="send" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#2563b5"/></marker><marker id="return" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#087f78"/></marker></defs><rect width="100%" height="100%" fill="#fff"/><g font-family="Tahoma, sans-serif"><text x="40" y="53" font-size="28" fill="#152e49" font-weight="700">DFD Level 0 · แผ่น A — บัญชีและการยืนยันตัวตน</text><text x="40" y="90" font-size="19" fill="#5c718b" >Gane &amp; Sarson · ภาพส่วนหนึ่งของ Level 0 เดิม · สำเนาอ้างอิงใช้หมายเลขเดิม</text><g transform="translate(40,120)"><rect x="0" y="0" width="1536" height="644" rx="12" fill="#ffffff" stroke="#d8e2ee"/>
+    <text x="30" y="40" font-size="26" fill="#183451" font-weight="700">A  บัญชีและการยืนยันตัวตน</text>
+    <text x="30" y="74" font-size="17" fill="#657991" >สมัคร · เข้าสู่ระบบ · ดูบัญชี · แก้ชื่อ · ออกจากระบบ</text>
+    <line x1="30" y1="92" x2="1505" y2="92" stroke="#e2e8f0"/><g data-node="P1"><rect x="620" y="120" width="220" height="450" rx="15" fill="#edf4ff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M620 167 H840" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="730" y="152" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">1.0</text>
+      <text x="730" y="347" font-size="25" fill="#193e66" text-anchor="middle" >จัดการบัญชี</text><text x="730" y="384" font-size="25" fill="#193e66" text-anchor="middle" >และยืนยันตัวตน</text>
+
+    </g><g data-node="E1"><rect x="30" y="283" width="208" height="140" fill="#f8fafc" stroke="#8799ae" stroke-width="1.8"/>
+    <text x="134" y="307" font-size="16" fill="#5b7088" text-anchor="middle" font-weight="700">E1</text>
+    <text x="134" y="344" font-size="20" fill="#253b55" text-anchor="middle" >ผู้ใช้งาน</text><text x="134" y="374" font-size="20" fill="#253b55" text-anchor="middle" >/ เจ้าของลิงก์</text>
+
+  </g><g data-flow="L01" data-from="E1" data-to="P1">
+    <text x="256" y="292" font-size="13" fill="#2563b5" font-weight="700">L01</text>
+    <text x="304" y="292" font-size="18" fill="#2563b5" >ชื่อ อีเมล รหัสผ่าน / session</text><text x="304" y="317" font-size="18" fill="#2563b5" >ชื่อใหม่ หรือ session ที่ขอยกเลิก</text>
+    <path d="M238 335 H620" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L02" data-from="P1" data-to="E1">
+    <text x="256" y="352" font-size="13" fill="#087f78" font-weight="700">L02</text>
+    <text x="304" y="352" font-size="18" fill="#087f78" >ข้อมูลบัญชี / ผลยืนยันตัวตน</text><text x="304" y="377" font-size="18" fill="#087f78" >cookie / ผลแก้ชื่อ / ผลออกจากระบบ</text>
+    <path d="M620 395 H238" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g><g data-node="D1"><rect x="1240" y="205" width="260" height="290" fill="#fff8e9"/>
+      <path d="M1500 205 H1240 V495 H1500 M1283 205 V495" fill="none" stroke="#ac7c2c" stroke-width="2"/>
+      <text x="1261" y="356" font-size="17" fill="#825b1b" text-anchor="middle" font-weight="700">D1</text>
+      <text x="1298" y="328" font-size="18" fill="#71511f" >ข้อมูลบัญชี / Session</text><text x="1298" y="357" font-size="18" fill="#71511f" >Auth · app_auth</text>
+      <text x="1298" y="384" font-size="13" fill="#8a6f42" >users · sessions · rate_limits</text>
+
+    </g><g data-flow="L03" data-from="P1" data-to="D1">
+    <text x="858" y="232" font-size="13" fill="#2563b5" font-weight="700">L03</text>
+    <text x="906" y="232" font-size="18" fill="#2563b5" >อีเมล / userId / แฮช session</text><text x="906" y="257" font-size="18" fill="#2563b5" >และ key สำหรับตรวจโควตา</text>
+    <path d="M840 275 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L04" data-from="P1" data-to="D1">
+    <text x="858" y="312" font-size="13" fill="#2563b5" font-weight="700">L04</text>
+    <text x="906" y="312" font-size="18" fill="#2563b5" >บัญชี / แฮชรหัสผ่าน / ชื่อใหม่</text><text x="906" y="337" font-size="18" fill="#2563b5" >แฮช session / การยกเลิก / โควตา</text>
+    <path d="M840 355 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L05" data-from="D1" data-to="P1">
+    <text x="858" y="392" font-size="13" fill="#087f78" font-weight="700">L05</text>
+    <text x="906" y="392" font-size="18" fill="#087f78" >บัญชี / แฮชรหัสผ่าน / session</text><text x="906" y="417" font-size="18" fill="#087f78" >วันหมดอายุ และข้อมูลโควตา</text>
+    <path d="M1240 435 H840" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g></g><text x="40" y="804" font-size="18" fill="#5c718b" >คำอธิบายทุกเส้น: docs/dfd.md · สีฟ้าไปทางขวา / สีเขียวไปทางซ้าย · อ่านตามหัวลูกศร</text></g></svg>

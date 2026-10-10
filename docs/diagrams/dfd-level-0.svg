@@ -1,1 +1,301 @@
-<svg id="svg-dfd-level-0" width="834.890625" xmlns="http://www.w3.org/2000/svg" class="flowchart" height="464.0711669921875" viewBox="0 0 834.890625 464.0711669921875" role="graphics-document document" aria-roledescription="flowchart-v2"><style>#svg-dfd-level-0{font-family:Tahoma,sans-serif;font-size:16px;fill:#333;}@keyframes edge-animation-frame{from{stroke-dashoffset:0;}}@keyframes dash{to{stroke-dashoffset:0;}}#svg-dfd-level-0 .edge-animation-slow{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 50s linear infinite;stroke-linecap:round;}#svg-dfd-level-0 .edge-animation-fast{stroke-dasharray:9,5!important;stroke-dashoffset:900;animation:dash 20s linear infinite;stroke-linecap:round;}#svg-dfd-level-0 .error-icon{fill:#552222;}#svg-dfd-level-0 .error-text{fill:#552222;stroke:#552222;}#svg-dfd-level-0 .edge-thickness-normal{stroke-width:1px;}#svg-dfd-level-0 .edge-thickness-thick{stroke-width:3.5px;}#svg-dfd-level-0 .edge-pattern-solid{stroke-dasharray:0;}#svg-dfd-level-0 .edge-thickness-invisible{stroke-width:0;fill:none;}#svg-dfd-level-0 .edge-pattern-dashed{stroke-dasharray:3;}#svg-dfd-level-0 .edge-pattern-dotted{stroke-dasharray:2;}#svg-dfd-level-0 .marker{fill:#333333;stroke:#333333;}#svg-dfd-level-0 .marker.cross{stroke:#333333;}#svg-dfd-level-0 svg{font-family:Tahoma,sans-serif;font-size:16px;}#svg-dfd-level-0 p{margin:0;}#svg-dfd-level-0 .label{font-family:Tahoma,sans-serif;color:#333;}#svg-dfd-level-0 .cluster-label text{fill:#333;}#svg-dfd-level-0 .cluster-label span{color:#333;}#svg-dfd-level-0 .cluster-label span p{background-color:transparent;}#svg-dfd-level-0 .label text,#svg-dfd-level-0 span{fill:#333;color:#333;}#svg-dfd-level-0 .node rect,#svg-dfd-level-0 .node circle,#svg-dfd-level-0 .node ellipse,#svg-dfd-level-0 .node polygon,#svg-dfd-level-0 .node path{fill:#ECECFF;stroke:#9370DB;stroke-width:1px;}#svg-dfd-level-0 .rough-node .label text,#svg-dfd-level-0 .node .label text,#svg-dfd-level-0 .image-shape .label,#svg-dfd-level-0 .icon-shape .label{text-anchor:middle;}#svg-dfd-level-0 .node .katex path{fill:#000;stroke:#000;stroke-width:1px;}#svg-dfd-level-0 .rough-node .label,#svg-dfd-level-0 .node .label,#svg-dfd-level-0 .image-shape .label,#svg-dfd-level-0 .icon-shape .label{text-align:center;}#svg-dfd-level-0 .node.clickable{cursor:pointer;}#svg-dfd-level-0 .root .anchor path{fill:#333333!important;stroke-width:0;stroke:#333333;}#svg-dfd-level-0 .arrowheadPath{fill:#333333;}#svg-dfd-level-0 .edgePath .path{stroke:#333333;stroke-width:2.0px;}#svg-dfd-level-0 .flowchart-link{stroke:#333333;fill:none;}#svg-dfd-level-0 .edgeLabel{background-color:rgba(232,232,232, 0.8);text-align:center;}#svg-dfd-level-0 .edgeLabel p{background-color:rgba(232,232,232, 0.8);}#svg-dfd-level-0 .edgeLabel rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#svg-dfd-level-0 .labelBkg{background-color:rgba(232, 232, 232, 0.5);}#svg-dfd-level-0 .cluster rect{fill:#ffffde;stroke:#aaaa33;stroke-width:1px;}#svg-dfd-level-0 .cluster text{fill:#333;}#svg-dfd-level-0 .cluster span{color:#333;}#svg-dfd-level-0 div.mermaidTooltip{position:absolute;text-align:center;max-width:200px;padding:2px;font-family:Tahoma,sans-serif;font-size:12px;background:hsl(80, 100%, 96.2745098039%);border:1px solid #aaaa33;border-radius:2px;pointer-events:none;z-index:100;}#svg-dfd-level-0 .flowchartTitleText{text-anchor:middle;font-size:18px;fill:#333;}#svg-dfd-level-0 rect.text{fill:none;stroke-width:0;}#svg-dfd-level-0 .icon-shape,#svg-dfd-level-0 .image-shape{background-color:rgba(232,232,232, 0.8);text-align:center;}#svg-dfd-level-0 .icon-shape p,#svg-dfd-level-0 .image-shape p{background-color:rgba(232,232,232, 0.8);padding:2px;}#svg-dfd-level-0 .icon-shape rect,#svg-dfd-level-0 .image-shape rect{opacity:0.5;background-color:rgba(232,232,232, 0.8);fill:rgba(232,232,232, 0.8);}#svg-dfd-level-0 .label-icon{display:inline-block;height:1em;overflow:visible;vertical-align:-0.125em;}#svg-dfd-level-0 .node .label-icon path{fill:currentColor;stroke:revert;stroke-width:revert;}#svg-dfd-level-0 :root{--mermaid-font-family:Tahoma,sans-serif;}</style><g><marker id="svg-dfd-level-0_flowchart-v2-pointEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-dfd-level-0_flowchart-v2-pointStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="4.5" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M 0 5 L 10 10 L 10 0 z" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-dfd-level-0_flowchart-v2-circleEnd" class="marker flowchart-v2" viewBox="0 0 10 10" refX="11" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-dfd-level-0_flowchart-v2-circleStart" class="marker flowchart-v2" viewBox="0 0 10 10" refX="-1" refY="5" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><circle cx="5" cy="5" r="5" class="arrowMarkerPath" style="stroke-width: 1; stroke-dasharray: 1, 0;"></circle></marker><marker id="svg-dfd-level-0_flowchart-v2-crossEnd" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="12" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><marker id="svg-dfd-level-0_flowchart-v2-crossStart" class="marker cross flowchart-v2" viewBox="0 0 11 11" refX="-1" refY="5.2" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" orient="auto"><path d="M 1,1 l 9,9 M 10,1 l -9,9" class="arrowMarkerPath" style="stroke-width: 2; stroke-dasharray: 1, 0;"></path></marker><g class="root"><g class="clusters"></g><g class="edgePaths"><path d="M120.641,150.999L140.741,148.5C160.841,146,201.042,141.001,240.657,140.743C280.273,140.484,319.303,144.965,338.818,147.205L358.333,149.446" id="L_User_System_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_User_System_0" data-points="W3sieCI6MTIwLjY0MDYyNSwieSI6MTUwLjk5OTE2MTY5OTEzNTUzfSx7IngiOjI0MS4yNDIxODc1LCJ5IjoxMzYuMDAyNTE3NzAwMTk1M30seyJ4IjozNjIuMzA3MjMxNTc4NjAwNSwieSI6MTQ5LjkwMjI2NzUzMjAyNzE0fV0=" marker-end="url(#svg-dfd-level-0_flowchart-v2-pointEnd)"></path><path d="M683.18,57.943L666.479,62.286C649.779,66.629,616.378,75.315,585.872,86.464C555.366,97.612,527.755,111.223,513.949,118.029L500.144,124.834" id="L_Visitor_System_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_Visitor_System_0" data-points="W3sieCI6NjgzLjE3OTY4NzUsInkiOjU3Ljk0MjcyMTMzNjg1MDc5fSx7IngiOjU4Mi45NzY1NjI1LCJ5Ijo4NC4wMDEyNTg4NTAwOTc2Nn0seyJ4Ijo0OTYuNTU2MTIzNTM2NzIzMSwieSI6MTI2LjYwMjc4NDg5ODk0MjE1fV0=" marker-end="url(#svg-dfd-level-0_flowchart-v2-pointEnd)"></path><path d="M485.14,109.941L501.446,94.951C517.752,79.961,550.364,49.98,582.71,37.175C615.056,24.37,647.136,28.74,663.176,30.925L679.216,33.109" id="L_System_Visitor_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_System_Visitor_0" data-points="W3sieCI6NDg1LjE0MDI0Mzc4MzU4NDksInkiOjEwOS45NDA3ODkxMjc3MjA4NX0seyJ4Ijo1ODIuOTc2NTYyNSwieSI6MjB9LHsieCI6NjgzLjE3OTY4NzUsInkiOjMzLjY0OTMwMTAyMDY1NDk2fV0=" marker-end="url(#svg-dfd-level-0_flowchart-v2-pointEnd)"></path><path d="M362.307,166.103L342.13,168.419C321.952,170.736,281.597,175.369,241.981,175.269C202.365,175.168,163.487,170.334,144.049,167.917L124.61,165.499" id="L_System_User_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_System_User_0" data-points="W3sieCI6MzYyLjMwNzIzMTU3ODYwMDUsInkiOjE2Ni4xMDI3Njc4NjgzNjM1fSx7IngiOjI0MS4yNDIxODc1LCJ5IjoxODAuMDAyNTE3NzAwMTk1M30seyJ4IjoxMjAuNjQwNjI1LCJ5IjoxNjUuMDA1ODczNzAxMjU1MX1d" marker-end="url(#svg-dfd-level-0_flowchart-v2-pointEnd)"></path><path d="M507.875,158.003L520.392,158.003C532.909,158.003,557.943,158.003,585.423,158.003C612.904,158.003,642.831,158.003,657.794,158.003L672.758,158.003" id="L_System_AuthDB_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_System_AuthDB_0" data-points="W3sieCI6NTAzLjg3NSwieSI6MTU4LjAwMjUxNzcwMDE5NTN9LHsieCI6NTgyLjk3NjU2MjUsInkiOjE1OC4wMDI1MTc3MDAxOTUzfSx7IngiOjY3Ni43NTc4MTI1LCJ5IjoxNTguMDAyNTE3NzAwMTk1M31d" marker-start="url(#svg-dfd-level-0_flowchart-v2-pointStart)" marker-end="url(#svg-dfd-level-0_flowchart-v2-pointEnd)"></path><path d="M489.996,206.611L505.493,219.794C520.99,232.978,551.983,259.345,582.794,272.529C613.604,285.712,644.232,285.712,659.546,285.712L674.859,285.712" id="L_System_LinkDB_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_System_LinkDB_0" data-points="W3sieCI6NDg2Ljk0OTM2ODg1MTExODY2LCJ5IjoyMDQuMDE4NzI3NDQ1NTI5Mjd9LHsieCI6NTgyLjk3NjU2MjUsInkiOjI4NS43MTIzNDg5Mzc5ODgzfSx7IngiOjY3OC44NTkzNzUsInkiOjI4NS43MTIzNDg5Mzc5ODgzfV0=" marker-start="url(#svg-dfd-level-0_flowchart-v2-pointStart)" marker-end="url(#svg-dfd-level-0_flowchart-v2-pointEnd)"></path><path d="M470.669,222.793L489.387,254.868C508.105,286.944,545.541,351.095,576.776,383.17C608.01,415.245,633.044,415.245,645.561,415.245L658.078,415.245" id="L_System_AnalyticsDB_0" class="edge-thickness-normal edge-pattern-solid edge-thickness-normal edge-pattern-solid flowchart-link" style=";" data-edge="true" data-et="edge" data-id="L_System_AnalyticsDB_0" data-points="W3sieCI6NDY4LjY1MjU1NjY2NzM3NCwieSI6MjE5LjMzODIwOTkyMTUwMzA1fSx7IngiOjU4Mi45NzY1NjI1LCJ5Ijo0MTUuMjQ1NDEwOTE5MTg5NDV9LHsieCI6NjYyLjA3ODEyNSwieSI6NDE1LjI0NTQxMDkxOTE4OTQ1fV0=" marker-start="url(#svg-dfd-level-0_flowchart-v2-pointStart)" marker-end="url(#svg-dfd-level-0_flowchart-v2-pointEnd)"></path></g><g class="edgeLabels"><g class="edgeLabel" transform="translate(241.2421875, 136.0025177001953)"><g class="label" data-id="L_User_System_0" transform="translate(-95.6015625, -12)"><foreignObject width="191.203125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>URL / settings / credentials</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(586.45377, 83.09699)"><g class="label" data-id="L_Visitor_System_0" transform="translate(-54.1015625, -12)"><foreignObject width="108.203125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>GET short code</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(582.9765625, 20)"><g class="label" data-id="L_System_Visitor_0" transform="translate(-45.125, -12)"><foreignObject width="90.25" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>302 Location</p></span></div></foreignObject></g></g><g class="edgeLabel" transform="translate(241.4061, 179.9837)"><g class="label" data-id="L_System_User_0" transform="translate(-91.65625, -12)"><foreignObject width="183.3125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"><p>short URL / QR / statistics</p></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_System_AuthDB_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_System_LinkDB_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g><g class="edgeLabel"><g class="label" data-id="L_System_AnalyticsDB_0" transform="translate(0, 0)"><foreignObject width="0" height="0"><div xmlns="http://www.w3.org/1999/xhtml" class="labelBkg" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="edgeLabel"></span></div></foreignObject></g></g></g><g class="nodes"><g class="node default" id="flowchart-User-0" transform="translate(64.3203125, 158.0025177001953)"><rect class="basic label-container" style="" x="-56.3203125" y="-27" width="112.640625" height="54"></rect><g class="label" style="" transform="translate(-26.3203125, -12)"><rect></rect><foreignObject width="52.640625" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>ผู้ใช้งาน</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-System-1" transform="translate(432.859375, 158.0025177001953)"><circle class="basic label-container" style="" r="71.015625" cx="0" cy="0"></circle><g class="label" style="" transform="translate(-63.515625, -12)"><rect></rect><foreignObject width="127.03125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Short URL System</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-Visitor-2" transform="translate(744.484375, 42)"><rect class="basic label-container" style="" x="-61.3046875" y="-27" width="122.609375" height="54"></rect><g class="label" style="" transform="translate(-31.3046875, -12)"><rect></rect><foreignObject width="62.609375" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>ผู้เปิดลิงก์</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-AuthDB-9" transform="translate(744.484375, 158.0025177001953)"><path d="M0,13.001679764832923 a67.7265625,13.001679764832923 0,0,0 135.453125,0 a67.7265625,13.001679764832923 0,0,0 -135.453125,0 l0,52.00167976483292 a67.7265625,13.001679764832923 0,0,0 135.453125,0 l0,-52.00167976483292" class="basic label-container" style="" transform="translate(-67.7265625, -39.002519647249386)"></path><g class="label" style="" transform="translate(-60.2265625, -2)"><rect></rect><foreignObject width="120.453125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Auth owned data</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-LinkDB-11" transform="translate(744.484375, 285.7123489379883)"><path d="M0,12.804878048780488 a65.625,12.804878048780488 0,0,0 131.25,0 a65.625,12.804878048780488 0,0,0 -131.25,0 l0,51.80487804878049 a65.625,12.804878048780488 0,0,0 131.25,0 l0,-51.80487804878049" class="basic label-container" style="" transform="translate(-65.625, -38.70731707317073)"></path><g class="label" style="" transform="translate(-58.125, -2)"><rect></rect><foreignObject width="116.25" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Link owned data</p></span></div></foreignObject></g></g><g class="node default" id="flowchart-AnalyticsDB-13" transform="translate(744.484375, 415.24541091918945)"><path d="M0,14.217166271296096 a82.40625,14.217166271296096 0,0,0 164.8125,0 a82.40625,14.217166271296096 0,0,0 -164.8125,0 l0,53.217166271296094 a82.40625,14.217166271296096 0,0,0 164.8125,0 l0,-53.217166271296094" class="basic label-container" style="" transform="translate(-82.40625, -40.82574940694414)"></path><g class="label" style="" transform="translate(-74.90625, -2)"><rect></rect><foreignObject width="149.8125" height="24"><div xmlns="http://www.w3.org/1999/xhtml" style="display: table-cell; white-space: nowrap; line-height: 1.5; max-width: 200px; text-align: center;"><span class="nodeLabel"><p>Analytics owned data</p></span></div></foreignObject></g></g></g></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="3160" height="2450" viewBox="0 0 3160 2450" role="img" aria-labelledby="title"><title id="title">DFD Level 0 — Short URL — Gane &amp; Sarson</title>
+    <defs><marker id="send" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#2563b5"/></marker><marker id="return" markerWidth="9" markerHeight="9" refX="8" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#087f78"/></marker></defs><rect width="100%" height="100%" fill="#fff"/><g font-family="Tahoma, sans-serif"><rect x="40" y="42" width="6" height="97" fill="#d42d25"/>
+  <text x="65" y="64" font-size="16" fill="#6b7d92" letter-spacing="2">DATA FLOW DIAGRAM  /  GANE &amp; SARSON</text>
+  <text x="65" y="110" font-size="38" fill="#152e49" font-weight="700">DFD Level 0 — ระบบ Short URL</text>
+  <text x="65" y="146" font-size="22" fill="#5c718b" >6 กระบวนการหลัก · 3 แหล่งเก็บข้อมูล · ลูกศรแต่ละเส้นระบุข้อมูลที่ส่งจริง</text>
+  <text x="2110" y="108" font-size="24" fill="#244c76" font-weight="700">ระดับนี้ขยายจาก Context Diagram</text>
+  <text x="2110" y="144" font-size="20" fill="#5c718b" >หมายเลขที่ซ้ำ = กระบวนการหรือแหล่งข้อมูลเดิม</text>
+  <rect x="40" y="176" width="3080" height="105" rx="10" fill="#f5f8fc"/>
+  <rect x="65" y="197" width="86" height="63" rx="9" fill="#edf4ff" stroke="#3f6b9b" stroke-width="1.5"/><path d="M65 217 H151" stroke="#3f6b9b"/>
+  <text x="108" y="212" font-size="13" fill="#244c76" text-anchor="middle" >1.0</text><text x="171" y="233" font-size="20" fill="#243a54" >Process · กระบวนการ</text>
+  <path d="M757 202 H635 V255 H757 M666 202 V255" stroke="#ac7c2c" fill="#fff8e9" stroke-width="1.8"/>
+  <text x="650" y="234" font-size="13" fill="#825b1b" text-anchor="middle" >D1</text><text x="778" y="233" font-size="20" fill="#243a54" >Data Store · แหล่งเก็บข้อมูล</text>
+  <rect x="1398" y="202" width="90" height="53" fill="#f8fafc" stroke="#8799ae" stroke-width="1.6"/>
+  <text x="1507" y="233" font-size="20" fill="#243a54" >External Agent · ผู้เกี่ยวข้องภายนอก</text>
+  <path d="M2240 218 H2330" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  <path d="M2330 245 H2240" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  <text x="2352" y="233" font-size="20" fill="#243a54" >Data Flow · ลูกศรทางเดียวแยกไป–กลับ</text>
+<g transform="translate(40,315)"><rect x="0" y="0" width="1536" height="644" rx="12" fill="#ffffff" stroke="#d8e2ee"/>
+    <text x="30" y="40" font-size="26" fill="#183451" font-weight="700">A  บัญชีและการยืนยันตัวตน</text>
+    <text x="30" y="74" font-size="17" fill="#657991" >สมัคร · เข้าสู่ระบบ · ดูบัญชี · แก้ชื่อ · ออกจากระบบ</text>
+    <line x1="30" y1="92" x2="1505" y2="92" stroke="#e2e8f0"/><g data-node="P1"><rect x="620" y="120" width="220" height="450" rx="15" fill="#edf4ff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M620 167 H840" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="730" y="152" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">1.0</text>
+      <text x="730" y="347" font-size="25" fill="#193e66" text-anchor="middle" >จัดการบัญชี</text><text x="730" y="384" font-size="25" fill="#193e66" text-anchor="middle" >และยืนยันตัวตน</text>
+
+    </g><g data-node="E1"><rect x="30" y="283" width="208" height="140" fill="#f8fafc" stroke="#8799ae" stroke-width="1.8"/>
+    <text x="134" y="307" font-size="16" fill="#5b7088" text-anchor="middle" font-weight="700">E1</text>
+    <text x="134" y="344" font-size="20" fill="#253b55" text-anchor="middle" >ผู้ใช้งาน</text><text x="134" y="374" font-size="20" fill="#253b55" text-anchor="middle" >/ เจ้าของลิงก์</text>
+
+  </g><g data-flow="L01" data-from="E1" data-to="P1">
+    <text x="256" y="292" font-size="13" fill="#2563b5" font-weight="700">L01</text>
+    <text x="304" y="292" font-size="18" fill="#2563b5" >ชื่อ อีเมล รหัสผ่าน / session</text><text x="304" y="317" font-size="18" fill="#2563b5" >ชื่อใหม่ หรือ session ที่ขอยกเลิก</text>
+    <path d="M238 335 H620" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L02" data-from="P1" data-to="E1">
+    <text x="256" y="352" font-size="13" fill="#087f78" font-weight="700">L02</text>
+    <text x="304" y="352" font-size="18" fill="#087f78" >ข้อมูลบัญชี / ผลยืนยันตัวตน</text><text x="304" y="377" font-size="18" fill="#087f78" >cookie / ผลแก้ชื่อ / ผลออกจากระบบ</text>
+    <path d="M620 395 H238" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g><g data-node="D1"><rect x="1240" y="205" width="260" height="290" fill="#fff8e9"/>
+      <path d="M1500 205 H1240 V495 H1500 M1283 205 V495" fill="none" stroke="#ac7c2c" stroke-width="2"/>
+      <text x="1261" y="356" font-size="17" fill="#825b1b" text-anchor="middle" font-weight="700">D1</text>
+      <text x="1298" y="328" font-size="18" fill="#71511f" >ข้อมูลบัญชี / Session</text><text x="1298" y="357" font-size="18" fill="#71511f" >Auth · app_auth</text>
+      <text x="1298" y="384" font-size="13" fill="#8a6f42" >users · sessions · rate_limits</text>
+
+    </g><g data-flow="L03" data-from="P1" data-to="D1">
+    <text x="858" y="232" font-size="13" fill="#2563b5" font-weight="700">L03</text>
+    <text x="906" y="232" font-size="18" fill="#2563b5" >อีเมล / userId / แฮช session</text><text x="906" y="257" font-size="18" fill="#2563b5" >และ key สำหรับตรวจโควตา</text>
+    <path d="M840 275 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L04" data-from="P1" data-to="D1">
+    <text x="858" y="312" font-size="13" fill="#2563b5" font-weight="700">L04</text>
+    <text x="906" y="312" font-size="18" fill="#2563b5" >บัญชี / แฮชรหัสผ่าน / ชื่อใหม่</text><text x="906" y="337" font-size="18" fill="#2563b5" >แฮช session / การยกเลิก / โควตา</text>
+    <path d="M840 355 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L05" data-from="D1" data-to="P1">
+    <text x="858" y="392" font-size="13" fill="#087f78" font-weight="700">L05</text>
+    <text x="906" y="392" font-size="18" fill="#087f78" >บัญชี / แฮชรหัสผ่าน / session</text><text x="906" y="417" font-size="18" fill="#087f78" >วันหมดอายุ และข้อมูลโควตา</text>
+    <path d="M1240 435 H840" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g></g><g transform="translate(1600,315)"><rect x="0" y="0" width="1536" height="644" rx="12" fill="#fbfcfe" stroke="#d8e2ee"/>
+    <text x="30" y="40" font-size="26" fill="#183451" font-weight="700">B  สร้างและจัดการลิงก์</text>
+    <text x="30" y="74" font-size="17" fill="#657991" >ตรวจเจ้าของ · ชื่อย่อ · วันหมดอายุ · เปิด–ปิดลิงก์</text>
+    <line x1="30" y1="92" x2="1505" y2="92" stroke="#e2e8f0"/><g data-node="P2"><rect x="620" y="120" width="220" height="450" rx="15" fill="#edf4ff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M620 167 H840" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="730" y="152" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">2.0</text>
+      <text x="730" y="347" font-size="25" fill="#193e66" text-anchor="middle" >สร้างและจัดการ</text><text x="730" y="384" font-size="25" fill="#193e66" text-anchor="middle" >Short URL</text>
+
+    </g><g data-node="E1"><rect x="30" y="283" width="208" height="140" fill="#f8fafc" stroke="#8799ae" stroke-width="1.8"/>
+    <text x="134" y="307" font-size="16" fill="#5b7088" text-anchor="middle" font-weight="700">E1</text>
+    <text x="134" y="344" font-size="20" fill="#253b55" text-anchor="middle" >ผู้ใช้งาน</text><text x="134" y="374" font-size="20" fill="#253b55" text-anchor="middle" >/ เจ้าของลิงก์</text>
+    <text x="134" y="413" font-size="12" fill="#71839a" text-anchor="middle" >สำเนาผู้เกี่ยวข้องเดิม</text>
+  </g><g data-flow="L06" data-from="E1" data-to="P2">
+    <text x="256" y="292" font-size="13" fill="#2563b5" font-weight="700">L06</text>
+    <text x="304" y="292" font-size="18" fill="#2563b5" >session, URL, ชื่อย่อ, วันหมดอายุ</text><text x="304" y="317" font-size="18" fill="#2563b5" >หรือรหัสลิงก์และการตั้งค่าใหม่</text>
+    <path d="M238 335 H620" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L07" data-from="P2" data-to="E1">
+    <text x="256" y="352" font-size="13" fill="#087f78" font-weight="700">L07</text>
+    <text x="304" y="352" font-size="18" fill="#087f78" >Short URL และข้อมูลลิงก์</text><text x="304" y="377" font-size="18" fill="#087f78" >สถานะ / วันหมดอายุที่บันทึกแล้ว</text>
+    <path d="M620 395 H238" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g><g data-node="D2"><rect x="1240" y="120" width="260" height="205" fill="#fff8e9"/>
+      <path d="M1500 120 H1240 V325 H1500 M1283 120 V325" fill="none" stroke="#ac7c2c" stroke-width="2"/>
+      <text x="1261" y="228.5" font-size="17" fill="#825b1b" text-anchor="middle" font-weight="700">D2</text>
+      <text x="1298" y="200.5" font-size="18" fill="#71511f" >ข้อมูลลิงก์</text><text x="1298" y="229.5" font-size="18" fill="#71511f" >Link · app_links</text>
+      <text x="1298" y="256.5" font-size="13" fill="#8a6f42" >links · rate_limits</text>
+
+    </g><g data-node="P1"><rect x="1240" y="415" width="260" height="145" rx="15" fill="#f8faff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M1240 462 H1500" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="1370" y="447" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">1.0</text>
+      <text x="1370" y="489.5" font-size="19" fill="#193e66" text-anchor="middle" >จัดการบัญชี</text><text x="1370" y="516.5" font-size="19" fill="#193e66" text-anchor="middle" >และยืนยันตัวตน</text>
+      <text x="1370" y="549" font-size="13" fill="#71839a" text-anchor="middle" >สำเนาอ้างอิง</text>
+    </g><g data-flow="L08" data-from="P2" data-to="D2">
+    <text x="858" y="135" font-size="13" fill="#2563b5" font-weight="700">L08</text>
+    <text x="906" y="135" font-size="18" fill="#2563b5" >รหัสลิงก์ / userId เจ้าของ</text><text x="906" y="160" font-size="18" fill="#2563b5" >ชื่อย่อ และ key สำหรับตรวจโควตา</text>
+    <path d="M840 178 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L09" data-from="P2" data-to="D2">
+    <text x="858" y="202" font-size="13" fill="#2563b5" font-weight="700">L09</text>
+    <text x="906" y="202" font-size="18" fill="#2563b5" >ลิงก์ใหม่ / สถานะเปิด–ปิด</text><text x="906" y="227" font-size="18" fill="#2563b5" >วันหมดอายุ และข้อมูลโควตา</text>
+    <path d="M840 245 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L10" data-from="D2" data-to="P2">
+    <text x="858" y="269" font-size="13" fill="#087f78" font-weight="700">L10</text>
+    <text x="906" y="269" font-size="18" fill="#087f78" >ลิงก์ / เจ้าของ / ชื่อย่อที่มีแล้ว</text><text x="906" y="294" font-size="18" fill="#087f78" >สถานะ วันหมดอายุ และโควตา</text>
+    <path d="M1240 312 H840" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g><g data-flow="L11" data-from="P2" data-to="P1">
+    <text x="858" y="448" font-size="13" fill="#2563b5" font-weight="700">L11</text>
+    <text x="906" y="448" font-size="18" fill="#2563b5" >session สำหรับยืนยันตัวตน</text>
+    <path d="M840 466 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L12" data-from="P1" data-to="P2">
+    <text x="858" y="492" font-size="13" fill="#087f78" font-weight="700">L12</text>
+    <text x="906" y="492" font-size="18" fill="#087f78" >userId ที่ยืนยันแล้ว</text><text x="906" y="517" font-size="18" fill="#087f78" >หรือผลยืนยันตัวตนไม่สำเร็จ</text>
+    <path d="M1240 535 H840" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g></g><g transform="translate(40,980)"><rect x="0" y="0" width="1536" height="644" rx="12" fill="#ffffff" stroke="#d8e2ee"/>
+    <text x="30" y="40" font-size="26" fill="#183451" font-weight="700">C  สร้าง QR Code</text>
+    <text x="30" y="74" font-size="17" fill="#657991" >QR เข้ารหัส Short URL · สร้างตามคำขอ · ไม่เก็บภาพในฐานข้อมูล</text>
+    <line x1="30" y1="92" x2="1505" y2="92" stroke="#e2e8f0"/><g data-node="P3"><rect x="620" y="120" width="220" height="450" rx="15" fill="#edf4ff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M620 167 H840" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="730" y="152" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">3.0</text>
+      <text x="730" y="347" font-size="25" fill="#193e66" text-anchor="middle" >สร้าง</text><text x="730" y="384" font-size="25" fill="#193e66" text-anchor="middle" >QR Code</text>
+
+    </g><g data-node="E1"><rect x="30" y="283" width="208" height="140" fill="#f8fafc" stroke="#8799ae" stroke-width="1.8"/>
+    <text x="134" y="307" font-size="16" fill="#5b7088" text-anchor="middle" font-weight="700">E1</text>
+    <text x="134" y="344" font-size="20" fill="#253b55" text-anchor="middle" >ผู้ใช้งาน</text><text x="134" y="374" font-size="20" fill="#253b55" text-anchor="middle" >/ เจ้าของลิงก์</text>
+    <text x="134" y="413" font-size="12" fill="#71839a" text-anchor="middle" >สำเนาผู้เกี่ยวข้องเดิม</text>
+  </g><g data-flow="L13" data-from="E1" data-to="P3">
+    <text x="256" y="292" font-size="13" fill="#2563b5" font-weight="700">L13</text>
+    <text x="304" y="292" font-size="18" fill="#2563b5" >session และรหัสลิงก์</text><text x="304" y="317" font-size="18" fill="#2563b5" >รูปแบบภาพ PNG หรือ SVG</text>
+    <path d="M238 335 H620" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L14" data-from="P3" data-to="E1">
+    <text x="256" y="377" font-size="13" fill="#087f78" font-weight="700">L14</text>
+    <text x="304" y="377" font-size="18" fill="#087f78" >ภาพ QR Code ของ Short URL</text>
+    <path d="M620 395 H238" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g><g data-node="D2"><rect x="1240" y="120" width="260" height="175" fill="#fff8e9"/>
+      <path d="M1500 120 H1240 V295 H1500 M1283 120 V295" fill="none" stroke="#ac7c2c" stroke-width="2"/>
+      <text x="1261" y="213.5" font-size="17" fill="#825b1b" text-anchor="middle" font-weight="700">D2</text>
+      <text x="1298" y="185.5" font-size="18" fill="#71511f" >ข้อมูลลิงก์</text><text x="1298" y="214.5" font-size="18" fill="#71511f" >Link · app_links</text>
+      <text x="1298" y="241.5" font-size="13" fill="#8a6f42" >links · rate_limits</text>
+      <text x="1298" y="285" font-size="12" fill="#8a6f42" >สำเนาแหล่งข้อมูลเดิม</text>
+    </g><g data-node="P1"><rect x="1240" y="415" width="260" height="145" rx="15" fill="#f8faff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M1240 462 H1500" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="1370" y="447" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">1.0</text>
+      <text x="1370" y="489.5" font-size="19" fill="#193e66" text-anchor="middle" >จัดการบัญชี</text><text x="1370" y="516.5" font-size="19" fill="#193e66" text-anchor="middle" >และยืนยันตัวตน</text>
+      <text x="1370" y="549" font-size="13" fill="#71839a" text-anchor="middle" >สำเนาอ้างอิง</text>
+    </g><g data-flow="L15" data-from="P3" data-to="D2">
+    <text x="858" y="160" font-size="13" fill="#2563b5" font-weight="700">L15</text>
+    <text x="906" y="160" font-size="18" fill="#2563b5" >รหัสลิงก์ และ userId เจ้าของ</text>
+    <path d="M840 178 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L16" data-from="D2" data-to="P3">
+    <text x="858" y="222" font-size="13" fill="#087f78" font-weight="700">L16</text>
+    <text x="906" y="222" font-size="18" fill="#087f78" >ข้อมูลลิงก์และเจ้าของ</text><text x="906" y="247" font-size="18" fill="#087f78" >สำหรับสร้าง Short URL ใน QR</text>
+    <path d="M1240 265 H840" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g><g data-flow="L17" data-from="P3" data-to="P1">
+    <text x="858" y="448" font-size="13" fill="#2563b5" font-weight="700">L17</text>
+    <text x="906" y="448" font-size="18" fill="#2563b5" >session สำหรับยืนยันตัวตน</text>
+    <path d="M840 466 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L18" data-from="P1" data-to="P3">
+    <text x="858" y="492" font-size="13" fill="#087f78" font-weight="700">L18</text>
+    <text x="906" y="492" font-size="18" fill="#087f78" >userId ที่ยืนยันแล้ว</text><text x="906" y="517" font-size="18" fill="#087f78" >หรือผลยืนยันตัวตนไม่สำเร็จ</text>
+    <path d="M1240 535 H840" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g></g><g transform="translate(1600,980)"><rect x="0" y="0" width="1536" height="644" rx="12" fill="#fbfcfe" stroke="#d8e2ee"/>
+    <text x="30" y="40" font-size="26" fill="#183451" font-weight="700">D  เปิดลิงก์และส่งต่อ</text>
+    <text x="30" y="74" font-size="17" fill="#657991" >GET ยืนยันบันทึกคลิกก่อน 302 · HEAD ส่งต่อโดยไม่บันทึกคลิก</text>
+    <line x1="30" y1="92" x2="1505" y2="92" stroke="#e2e8f0"/><g data-node="P4"><rect x="620" y="120" width="220" height="450" rx="15" fill="#edf4ff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M620 167 H840" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="730" y="152" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">4.0</text>
+      <text x="730" y="347" font-size="25" fill="#193e66" text-anchor="middle" >ตรวจลิงก์</text><text x="730" y="384" font-size="25" fill="#193e66" text-anchor="middle" >และส่งต่อ</text>
+
+    </g><g data-node="E2"><rect x="30" y="283" width="208" height="140" fill="#f8fafc" stroke="#8799ae" stroke-width="1.8"/>
+    <text x="134" y="307" font-size="16" fill="#5b7088" text-anchor="middle" font-weight="700">E2</text>
+    <text x="134" y="344" font-size="20" fill="#253b55" text-anchor="middle" >ผู้เปิดลิงก์</text><text x="134" y="374" font-size="20" fill="#253b55" text-anchor="middle" >/ ผู้สแกน QR</text>
+
+  </g><g data-flow="L19" data-from="E2" data-to="P4">
+    <text x="256" y="292" font-size="13" fill="#2563b5" font-weight="700">L19</text>
+    <text x="304" y="292" font-size="18" fill="#2563b5" >รหัสลิงก์, GET/HEAD</text><text x="304" y="317" font-size="18" fill="#2563b5" >ข้อมูลเบราว์เซอร์ และแหล่งที่มา</text>
+    <path d="M238 335 H620" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L20" data-from="P4" data-to="E2">
+    <text x="256" y="352" font-size="13" fill="#087f78" font-weight="700">L20</text>
+    <text x="304" y="352" font-size="18" fill="#087f78" >URL ปลายทางพร้อม HTTP 302</text><text x="304" y="377" font-size="18" fill="#087f78" >หรือผลไม่พบ / ปิด / หมดอายุ</text>
+    <path d="M620 395 H238" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g><g data-node="D2"><rect x="1240" y="120" width="260" height="175" fill="#fff8e9"/>
+      <path d="M1500 120 H1240 V295 H1500 M1283 120 V295" fill="none" stroke="#ac7c2c" stroke-width="2"/>
+      <text x="1261" y="213.5" font-size="17" fill="#825b1b" text-anchor="middle" font-weight="700">D2</text>
+      <text x="1298" y="185.5" font-size="18" fill="#71511f" >ข้อมูลลิงก์</text><text x="1298" y="214.5" font-size="18" fill="#71511f" >Link · app_links</text>
+      <text x="1298" y="241.5" font-size="13" fill="#8a6f42" >links · rate_limits</text>
+      <text x="1298" y="285" font-size="12" fill="#8a6f42" >สำเนาแหล่งข้อมูลเดิม</text>
+    </g><g data-node="P5"><rect x="1240" y="415" width="260" height="145" rx="15" fill="#f8faff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M1240 462 H1500" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="1370" y="447" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">5.0</text>
+      <text x="1370" y="489.5" font-size="19" fill="#193e66" text-anchor="middle" >บันทึกและสรุป</text><text x="1370" y="516.5" font-size="19" fill="#193e66" text-anchor="middle" >การเปิดลิงก์</text>
+      <text x="1370" y="549" font-size="13" fill="#71839a" text-anchor="middle" >สำเนาอ้างอิง</text>
+    </g><g data-flow="L21" data-from="P4" data-to="D2">
+    <text x="858" y="160" font-size="13" fill="#2563b5" font-weight="700">L21</text>
+    <text x="906" y="160" font-size="18" fill="#2563b5" >รหัสใน Short URL</text>
+    <path d="M840 178 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L22" data-from="D2" data-to="P4">
+    <text x="858" y="222" font-size="13" fill="#087f78" font-weight="700">L22</text>
+    <text x="906" y="222" font-size="18" fill="#087f78" >URL ต้นฉบับ / linkId / ownerId</text><text x="906" y="247" font-size="18" fill="#087f78" >สถานะ และวันหมดอายุ</text>
+    <path d="M1240 265 H840" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g><g data-flow="L23" data-from="P4" data-to="P5">
+    <text x="858" y="423" font-size="13" fill="#2563b5" font-weight="700">L23</text>
+    <text x="906" y="423" font-size="18" fill="#2563b5" >eventId, linkId, ownerId, เวลา</text><text x="906" y="448" font-size="18" fill="#2563b5" >ชนิดอุปกรณ์ และแหล่งที่มา</text>
+    <path d="M840 466 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L24" data-from="P5" data-to="P4">
+    <text x="858" y="492" font-size="13" fill="#087f78" font-weight="700">L24</text>
+    <text x="906" y="492" font-size="18" fill="#087f78" >ผลยืนยันบันทึกเหตุการณ์</text><text x="906" y="517" font-size="18" fill="#087f78" >หรือข้อผิดพลาดในการบันทึก</text>
+    <path d="M1240 535 H840" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g></g><g transform="translate(40,1645)"><rect x="0" y="0" width="1536" height="644" rx="12" fill="#ffffff" stroke="#d8e2ee"/>
+    <text x="30" y="40" font-size="26" fill="#183451" font-weight="700">E  บันทึกและสรุปการเปิด</text>
+    <text x="30" y="74" font-size="17" fill="#657991" >eventId ป้องกันเหตุการณ์เดิมซ้ำ · รับคำขอสถิติจาก 6.0 ในแผ่น F</text>
+    <line x1="30" y1="92" x2="1505" y2="92" stroke="#e2e8f0"/><g data-node="P5"><rect x="620" y="120" width="220" height="450" rx="15" fill="#edf4ff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M620 167 H840" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="730" y="152" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">5.0</text>
+      <text x="730" y="347" font-size="25" fill="#193e66" text-anchor="middle" >บันทึกและสรุป</text><text x="730" y="384" font-size="25" fill="#193e66" text-anchor="middle" >การเปิดลิงก์</text>
+
+    </g><g data-node="P4"><rect x="30" y="283" width="208" height="140" rx="15" fill="#f8faff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M30 330 H238" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="134" y="315" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">4.0</text>
+      <text x="134" y="355" font-size="19" fill="#193e66" text-anchor="middle" >ตรวจลิงก์</text><text x="134" y="382" font-size="19" fill="#193e66" text-anchor="middle" >และส่งต่อ</text>
+      <text x="134" y="412" font-size="13" fill="#71839a" text-anchor="middle" >สำเนาอ้างอิง</text>
+    </g><g data-flow="L23" data-from="P4" data-to="P5">
+    <text x="256" y="292" font-size="13" fill="#2563b5" font-weight="700">L23</text>
+    <text x="304" y="292" font-size="18" fill="#2563b5" >eventId, linkId, ownerId, เวลา</text><text x="304" y="317" font-size="18" fill="#2563b5" >ชนิดอุปกรณ์ และแหล่งที่มา</text>
+    <path d="M238 335 H620" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L24" data-from="P5" data-to="P4">
+    <text x="256" y="352" font-size="13" fill="#087f78" font-weight="700">L24</text>
+    <text x="304" y="352" font-size="18" fill="#087f78" >ผลยืนยันบันทึกเหตุการณ์</text><text x="304" y="377" font-size="18" fill="#087f78" >หรือข้อผิดพลาดในการบันทึก</text>
+    <path d="M620 395 H238" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g><g data-node="D3"><rect x="1240" y="205" width="260" height="290" fill="#fff8e9"/>
+      <path d="M1500 205 H1240 V495 H1500 M1283 205 V495" fill="none" stroke="#ac7c2c" stroke-width="2"/>
+      <text x="1261" y="356" font-size="17" fill="#825b1b" text-anchor="middle" font-weight="700">D3</text>
+      <text x="1298" y="328" font-size="18" fill="#71511f" >ข้อมูลการเปิดลิงก์</text><text x="1298" y="357" font-size="18" fill="#71511f" >Analytics · app_analytics</text>
+      <text x="1298" y="384" font-size="13" fill="#8a6f42" >click_events</text>
+
+    </g><g data-flow="L25" data-from="P5" data-to="D3">
+    <text x="858" y="232" font-size="13" fill="#2563b5" font-weight="700">L25</text>
+    <text x="906" y="232" font-size="18" fill="#2563b5" >เหตุการณ์เปิดลิงก์</text><text x="906" y="257" font-size="18" fill="#2563b5" >พร้อม eventId ที่ใช้ป้องกันซ้ำ</text>
+    <path d="M840 275 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L26" data-from="P5" data-to="D3">
+    <text x="858" y="312" font-size="13" fill="#2563b5" font-weight="700">L26</text>
+    <text x="906" y="312" font-size="18" fill="#2563b5" >ownerId / linkId / ช่วงวันที่</text><text x="906" y="337" font-size="18" fill="#2563b5" >และเงื่อนไขสรุปสถิติ</text>
+    <path d="M840 355 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L27" data-from="D3" data-to="P5">
+    <text x="858" y="392" font-size="13" fill="#087f78" font-weight="700">L27</text>
+    <text x="906" y="392" font-size="18" fill="#087f78" >ผลบันทึก / เหตุการณ์ที่มีแล้ว</text><text x="906" y="417" font-size="18" fill="#087f78" >ยอดคลิก รายวัน อุปกรณ์ แหล่งที่มา</text>
+    <path d="M1240 435 H840" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g></g><g transform="translate(1600,1645)"><rect x="0" y="0" width="1536" height="644" rx="12" fill="#fbfcfe" stroke="#d8e2ee"/>
+    <text x="30" y="40" font-size="26" fill="#183451" font-weight="700">F  ประวัติและรายงานสถิติ</text>
+    <text x="30" y="74" font-size="17" fill="#657991" >เฉพาะข้อมูลเจ้าของ · ค้นหา · แบ่งหน้า · สถิติตามช่วงวันที่</text>
+    <line x1="30" y1="92" x2="1505" y2="92" stroke="#e2e8f0"/><g data-node="P6"><rect x="620" y="109" width="220" height="484" rx="15" fill="#edf4ff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M620 156 H840" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="730" y="141" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">6.0</text>
+      <text x="730" y="353" font-size="25" fill="#193e66" text-anchor="middle" >จัดทำประวัติ</text><text x="730" y="390" font-size="25" fill="#193e66" text-anchor="middle" >และรายงานสถิติ</text>
+
+    </g><g data-node="E1"><rect x="30" y="283" width="208" height="140" fill="#f8fafc" stroke="#8799ae" stroke-width="1.8"/>
+    <text x="134" y="307" font-size="16" fill="#5b7088" text-anchor="middle" font-weight="700">E1</text>
+    <text x="134" y="344" font-size="20" fill="#253b55" text-anchor="middle" >ผู้ใช้งาน</text><text x="134" y="374" font-size="20" fill="#253b55" text-anchor="middle" >/ เจ้าของลิงก์</text>
+    <text x="134" y="413" font-size="12" fill="#71839a" text-anchor="middle" >สำเนาผู้เกี่ยวข้องเดิม</text>
+  </g><g data-flow="L28" data-from="E1" data-to="P6">
+    <text x="256" y="292" font-size="13" fill="#2563b5" font-weight="700">L28</text>
+    <text x="304" y="292" font-size="18" fill="#2563b5" >session, คำค้น, สถานะ, เลขหน้า</text><text x="304" y="317" font-size="18" fill="#2563b5" >ช่วงวันที่ และรหัสลิงก์ (ถ้าระบุ)</text>
+    <path d="M238 335 H620" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L29" data-from="P6" data-to="E1">
+    <text x="256" y="352" font-size="13" fill="#087f78" font-weight="700">L29</text>
+    <text x="304" y="352" font-size="18" fill="#087f78" >ประวัติ / จำนวนลิงก์ / ยอดคลิก</text><text x="304" y="377" font-size="18" fill="#087f78" >รายวัน / อุปกรณ์ / แหล่งที่มา</text>
+    <path d="M620 395 H238" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g><g data-node="P1"><rect x="1240" y="109" width="260" height="134" rx="15" fill="#f8faff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M1240 156 H1500" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="1370" y="141" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">1.0</text>
+      <text x="1370" y="178" font-size="19" fill="#193e66" text-anchor="middle" >จัดการบัญชี</text><text x="1370" y="205" font-size="19" fill="#193e66" text-anchor="middle" >และยืนยันตัวตน</text>
+      <text x="1370" y="232" font-size="13" fill="#71839a" text-anchor="middle" >สำเนาอ้างอิง</text>
+    </g><g data-flow="L30" data-from="P6" data-to="P1">
+    <text x="858" y="143" font-size="13" fill="#2563b5" font-weight="700">L30</text>
+    <text x="906" y="143" font-size="18" fill="#2563b5" >session สำหรับยืนยันตัวตน</text>
+    <path d="M840 161 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L31" data-from="P1" data-to="P6">
+    <text x="858" y="181" font-size="13" fill="#087f78" font-weight="700">L31</text>
+    <text x="906" y="181" font-size="18" fill="#087f78" >userId ที่ยืนยันแล้ว</text><text x="906" y="206" font-size="18" fill="#087f78" >หรือผลยืนยันตัวตนไม่สำเร็จ</text>
+    <path d="M1240 224 H840" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g><g data-node="P2"><rect x="1240" y="284" width="260" height="134" rx="15" fill="#f8faff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M1240 331 H1500" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="1370" y="316" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">2.0</text>
+      <text x="1370" y="353" font-size="19" fill="#193e66" text-anchor="middle" >สร้างและจัดการ</text><text x="1370" y="380" font-size="19" fill="#193e66" text-anchor="middle" >Short URL</text>
+      <text x="1370" y="407" font-size="13" fill="#71839a" text-anchor="middle" >สำเนาอ้างอิง</text>
+    </g><g data-flow="L32" data-from="P6" data-to="P2">
+    <text x="858" y="293" font-size="13" fill="#2563b5" font-weight="700">L32</text>
+    <text x="906" y="293" font-size="18" fill="#2563b5" >userId, คำค้น, สถานะ, เลขหน้า</text><text x="906" y="318" font-size="18" fill="#2563b5" >หรือรหัสลิงก์ที่ต้องตรวจเจ้าของ</text>
+    <path d="M840 336 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L33" data-from="P2" data-to="P6">
+    <text x="858" y="356" font-size="13" fill="#087f78" font-weight="700">L33</text>
+    <text x="906" y="356" font-size="18" fill="#087f78" >ลิงก์ของเจ้าของ / ข้อมูลแบ่งหน้า</text><text x="906" y="381" font-size="18" fill="#087f78" >จำนวนลิงก์รวม และลิงก์ที่ใช้งาน</text>
+    <path d="M1240 399 H840" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g><g data-node="P5"><rect x="1240" y="459" width="260" height="134" rx="15" fill="#f8faff" stroke="#3f6b9b" stroke-width="2"/>
+      <path d="M1240 506 H1500" stroke="#3f6b9b" stroke-width="1.8"/>
+      <text x="1370" y="491" font-size="23" fill="#244c76" text-anchor="middle" font-weight="700">5.0</text>
+      <text x="1370" y="528" font-size="19" fill="#193e66" text-anchor="middle" >บันทึกและสรุป</text><text x="1370" y="555" font-size="19" fill="#193e66" text-anchor="middle" >การเปิดลิงก์</text>
+      <text x="1370" y="582" font-size="13" fill="#71839a" text-anchor="middle" >สำเนาอ้างอิง</text>
+    </g><g data-flow="L34" data-from="P6" data-to="P5">
+    <text x="858" y="468" font-size="13" fill="#2563b5" font-weight="700">L34</text>
+    <text x="906" y="468" font-size="18" fill="#2563b5" >ownerId / linkId / ช่วงวันที่</text><text x="906" y="493" font-size="18" fill="#2563b5" >หรือรายการ linkId สำหรับนับคลิก</text>
+    <path d="M840 511 H1240" fill="none" stroke="#2563b5" stroke-width="2" marker-end="url(#send)"/>
+  </g><g data-flow="L35" data-from="P5" data-to="P6">
+    <text x="858" y="531" font-size="13" fill="#087f78" font-weight="700">L35</text>
+    <text x="906" y="531" font-size="18" fill="#087f78" >ยอดคลิกสะสม / รายวัน</text><text x="906" y="556" font-size="18" fill="#087f78" >สรุปอุปกรณ์ และแหล่งที่มา</text>
+    <path d="M1240 574 H840" fill="none" stroke="#087f78" stroke-width="2" marker-end="url(#return)"/>
+  </g></g><line x1="40" y1="2335" x2="3120" y2="2335" stroke="#d8e2ee"/>
+  <text x="40" y="2373" font-size="20" fill="#526b86" >D1 / D2 / D3 เป็นแหล่งข้อมูลใน PostgreSQL เดียว แยก app_auth / app_links / app_analytics · ไม่ใช่ฐานข้อมูลสามเครื่อง</text>
+  <text x="40" y="2410" font-size="19" fill="#526b86" >กรอบ A–F ช่วยจัดหน้าและขยายอ่าน ทุกกรอบอยู่ใน Level 0 เดียวกัน · สีช่วยแยกทิศทาง · ผลลัพธ์อาจเป็นข้อผิดพลาด · รายละเอียด: docs/dfd.md</text></g></svg>

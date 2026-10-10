@@ -17,6 +17,12 @@ Supabase ใช้ instance เดียว แยก app_auth/app_links/app_ana
 
 userId/linkId/ownerId ระหว่าง services เป็น logical references ไม่ใช้ foreign key ข้าม schema User–Session มี foreign key ภายใน Auth เท่านั้น
 
+ER รวมใน `diagrams/er.mmd` แสดงทั้งความสัมพันธ์ที่ฐานข้อมูลบังคับและความสัมพันธ์ทางตรรกะ: เส้นทึบคือ User–Session ที่มี Foreign Key จริง ส่วนเส้นประคือ User–Link, Link–ClickEvent และ User–ClickEvent ซึ่งบริการอ้างอิงกันด้วย ID ผ่าน API ไม่ใช่ foreign key ใน PostgreSQL ป้าย `1 : N` บนเส้นแสดงหนึ่งต่อหลาย โดยฝั่งหลายมี 0 รายการได้ สำหรับเส้นประ ความสัมพันธ์นี้เป็นสิ่งที่ระบบตั้งใจ ไม่ได้หมายถึง constraint ที่ฐานข้อมูลบังคับ
+
+`USERS`, `SESSIONS`, `AUTH_RATE_LIMITS` อยู่ใน `app_auth`; `LINKS`, `LINK_RATE_LIMITS` อยู่ใน `app_links`; `CLICK_EVENTS` อยู่ใน `app_analytics` ชื่อตารางจริงเป็นตัวพิมพ์เล็ก และตาราง rate limit ของทั้งสองบริการชื่อ `rate_limits` เหมือนกันแต่คนละ schema ตาราง rate limit ใช้ key ของโควตา ไม่มี foreign key กับ User หรือ Link
+
+ใน ER รวม ช่องคีย์ใช้ `FK` แสดงคอลัมน์อ้างอิงทั้งสองชนิด โดยคอลัมน์ที่มี constraint จริงกำกับ `ฐานข้อมูลบังคับ` ส่วนการอ้างอิงข้ามบริการกำกับ `ข้ามบริการ ฐานข้อมูลไม่บังคับ` การแสดง FK ในภาพไม่ได้เพิ่ม `@relation` หรือ foreign key ข้าม schema ให้ฐานข้อมูล
+
 ## การล่มและข้อจำกัด
 
 Auth หยุด: protected API ใช้ไม่ได้ แต่ public redirect ยังใช้ Link/Analytics ได้ Link หยุด: สร้าง/เปิดลิงก์ใช้ไม่ได้ Analytics หยุด: GET redirect ตอบ 503 ตามนโยบายยืนยันบันทึกคลิกก่อน redirect แต่ HEAD ยังตรวจลิงก์ได้ การแบ่ง services จึงไม่ได้ทำให้ทุกฟังก์ชันเป็นอิสระจากกัน
@@ -28,3 +34,5 @@ Vercel เปิด/พัก Functions ตามคำขอ ข้อมูล
 ## Diagrams
 
 Architecture: diagrams/architecture.mmd; DFD Level 0: diagrams/dfd-level-0.mmd; ER: diagrams/er.mmd และ auth-er/links-er/analytics-er.mmd; Sequence: diagrams/sequences.mmd
+
+DFD ฉบับละเอียดอยู่ใน [docs/dfd.md](dfd.md) ใช้สัญลักษณ์ Gane & Sarson: Context Diagram แสดง Process 0 ส่วน DFD Level 0 แสดงกระบวนการหลัก 1.0–6.0 และแหล่งเก็บข้อมูล D1–D3 ภาพแยก A–F เป็นส่วนขยายเพื่ออ่านของ Level 0 เดิม ไม่ใช่ Level 1 หมายเลขที่ซ้ำหมายถึงรายการเดียวกัน

@@ -1,5 +1,12 @@
 erDiagram
-  USERS ||--o{ SESSIONS : owns
+  direction TB
+  %% FK in the key column denotes a reference in this combined model.
+  %% Comments and line styles distinguish physical and logical references.
+  %% Dashed lines here distinguish service-level references, not database FKs.
+  USERS ||--o{ SESSIONS : "1 : N"
+  USERS ||..o{ LINKS : "1 : N"
+  LINKS ||..o{ CLICK_EVENTS : "1 : N"
+  USERS ||..o{ CLICK_EVENTS : "1 : N"
   USERS {
     varchar id PK
     varchar email UK
@@ -9,7 +16,7 @@ erDiagram
   }
   SESSIONS {
     varchar tokenHash PK
-    varchar userId FK
+    varchar userId FK "อ้างถึง USERS.id ฐานข้อมูลบังคับ"
     timestamptz expiresAt
   }
   AUTH_RATE_LIMITS {
@@ -19,11 +26,11 @@ erDiagram
   }
   LINKS {
     varchar id PK
-    varchar userId
+    varchar userId FK "อ้างถึง USERS.id ข้ามบริการ ฐานข้อมูลไม่บังคับ"
     varchar code UK
     text originalUrl
     boolean isActive
-    timestamptz expiresAt
+    timestamptz expiresAt "เว้นว่างได้"
     timestamptz createdAt
     timestamptz updatedAt
   }
@@ -35,8 +42,8 @@ erDiagram
   CLICK_EVENTS {
     varchar id PK
     varchar eventId UK
-    varchar linkId
-    varchar ownerId
+    varchar linkId FK "อ้างถึง LINKS.id ข้ามบริการ ฐานข้อมูลไม่บังคับ"
+    varchar ownerId FK "อ้างถึง USERS.id ข้ามบริการ ฐานข้อมูลไม่บังคับ"
     timestamptz clickedAt
     varchar referrerHost
     varchar deviceType
