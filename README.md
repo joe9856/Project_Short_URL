@@ -8,7 +8,8 @@
 |---|---|
 | Source Code Repository | [joe9856/Project_Short_URL](https://github.com/joe9856/Project_Short_URL) |
 | เว็บสำหรับทดสอบออนไลน์ | [Short URL](https://project-short-url-qrrz.vercel.app) |
-| Architecture Diagram และ DFD Level 0 | [เปิดแผนภาพใน Figma](https://www.figma.com/design/KWIrbon5NX18Yh3vvZBqPq/Short-URL-%E2%80%94-Microservices-architecture?node-id=0-1) |
+| Architecture Diagram | [เปิดภาพขนาดเต็ม](docs/diagrams/architecture-submission.png) · [เปิดใน Figma](https://www.figma.com/design/KWIrbon5NX18Yh3vvZBqPq/Short-URL-%E2%80%94-Microservices-architecture?node-id=0-1) |
+| DFD Level 0 | [เปิดภาพขนาดเต็ม](docs/diagrams/dfd-level-0-submission.png) · [เปิดใน Figma](https://www.figma.com/design/KWIrbon5NX18Yh3vvZBqPq/Short-URL-%E2%80%94-Microservices-architecture?node-id=0-1) |
 | ER Diagram | [ดูภาพ PNG](docs/diagrams/er.png) · [ขยายภาพ SVG](docs/diagrams/er.svg) |
 
 ผู้ตรวจสามารถสมัครบัญชีผ่านหน้า [สมัครสมาชิก](https://project-short-url-qrrz.vercel.app/register) แล้วเข้าสู่ระบบเพื่อสร้างและจัดการลิงก์ได้ การเปิด Short URL ไม่ต้องเข้าสู่ระบบ
@@ -203,11 +204,21 @@ E2E ทดสอบ Desktop, Tablet และ Mobile ผ่านเบราว
 
 ## แผนภาพระบบ
 
-### Architecture Diagram และ DFD Level 0
+### Architecture Diagram
 
-ดูแผนภาพทั้งสองใน [Figma — Short URL / Microservices architecture](https://www.figma.com/design/KWIrbon5NX18Yh3vvZBqPq/Short-URL-%E2%80%94-Microservices-architecture?node-id=0-1)
+แผนภาพส่วนประกอบและการติดต่อระหว่าง Frontend, Gateway, Auth, Link, Analytics และ PostgreSQL
 
-Architecture Diagram อธิบายส่วนประกอบและการติดต่อระหว่างบริการ ส่วน DFD Level 0 อธิบายกระบวนการหลัก การไหลของข้อมูล และแหล่งเก็บข้อมูล
+![Short URL — Architecture Diagram](docs/diagrams/architecture-submission.png)
+
+[เปิดภาพ Architecture ขนาดเต็ม](docs/diagrams/architecture-submission.png) · [เปิดแผนภาพใน Figma](https://www.figma.com/design/KWIrbon5NX18Yh3vvZBqPq/Short-URL-%E2%80%94-Microservices-architecture?node-id=0-1)
+
+### DFD Level 0
+
+แผนภาพกระแสข้อมูลแบบ DeMarco & Yourdon แสดงกระบวนการหลัก 5 กระบวนการ ผู้ใช้งาน และแหล่งเก็บข้อมูล `app_auth`, `app_links`, `app_analytics`
+
+![Short URL — DFD Level 0](docs/diagrams/dfd-level-0-submission.png)
+
+[เปิดภาพ DFD Level 0 ขนาดเต็ม](docs/diagrams/dfd-level-0-submission.png) · [เปิดแผนภาพใน Figma](https://www.figma.com/design/KWIrbon5NX18Yh3vvZBqPq/Short-URL-%E2%80%94-Microservices-architecture?node-id=0-1)
 
 ### ER Diagram
 
@@ -232,7 +243,7 @@ Auth เก็บ Session Token แบบแฮชในฐานข้อมู
 ## เอกสารเพิ่มเติม
 
 - [Architecture Explanation](docs/architecture.md)
-- [รายละเอียด DFD และข้อมูลแต่ละเส้น](docs/dfd.md)
+- [เอกสาร DFD แบบ Gane & Sarson แยก 6 กระบวนการ (เอกสารประกอบ)](docs/dfd.md)
 - [API Contract](docs/api.md)
 - [คู่มืออ่านโค้ด](docs/learning-guide.md)
 - [PostgreSQL ในเครื่อง](docs/local-postgres.md)
