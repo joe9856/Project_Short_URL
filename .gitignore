@@ -11,3 +11,27 @@ test-results/
 *.log
 
 .vercel/
+
+# Publish only documentation used for the submitted system.
+/docs/*
+!/docs/README.md
+!/docs/api.md
+!/docs/architecture.md
+!/docs/deployment.md
+!/docs/dfd.md
+!/docs/local-postgres.md
+!/docs/testing.md
+!/docs/diagrams/
+/docs/diagrams/*
+!/docs/diagrams/architecture-submission.png
+!/docs/diagrams/dfd-level-0-submission.png
+!/docs/diagrams/er.png
+!/docs/diagrams/er.svg
+!/docs/diagrams/er.mmd
+
+# Keep original plans and retired tooling locally.
+/PLAN.md
+/scripts/render-dfd.mjs
+/scripts/render-dfd-context.mjs
+/scripts/local-mysql.mjs
+/scripts/stop-local-mysql.mjs

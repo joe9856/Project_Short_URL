@@ -33,6 +33,7 @@ Vercel เปิด/พัก Functions ตามคำขอ ข้อมูล
 
 ## Diagrams
 
-Architecture: diagrams/architecture.mmd; DFD Level 0: diagrams/dfd-level-0.mmd; ER: diagrams/er.mmd และ auth-er/links-er/analytics-er.mmd; Sequence: diagrams/sequences.mmd
-
-DFD ฉบับละเอียดอยู่ใน [docs/dfd.md](dfd.md) ใช้สัญลักษณ์ Gane & Sarson: Context Diagram แสดง Process 0 ส่วน DFD Level 0 แสดงกระบวนการหลัก 1.0–6.0 และแหล่งเก็บข้อมูล D1–D3 ภาพแยก A–F เป็นส่วนขยายเพื่ออ่านของ Level 0 เดิม ไม่ใช่ Level 1 หมายเลขที่ซ้ำหมายถึงรายการเดียวกัน
+- [Architecture Diagram](diagrams/architecture-submission.png) — ส่วนประกอบและการติดต่อระหว่างบริการ
+- [DFD Level 0](diagrams/dfd-level-0-submission.png) — กระบวนการหลัก 5 กระบวนการตามสัญลักษณ์ DeMarco & Yourdon พร้อม [คำอธิบายกระแสข้อมูล](dfd.md)
+- [ER Diagram PNG](diagrams/er.png) · [SVG](diagrams/er.svg) · [Mermaid Source](diagrams/er.mmd)
+- [Architecture และ DFD ใน Figma](https://www.figma.com/design/KWIrbon5NX18Yh3vvZBqPq/Short-URL-%E2%80%94-Microservices-architecture?node-id=0-1)

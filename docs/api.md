@@ -27,7 +27,7 @@ Stats: totalLinks,activeLinks,totalClicks,clicksByDate:[{date,clicks}],devices:[
 
 ## Private REST
 
-ทุก API ของ service ต้องมี `X-Internal-Key` เท่ากับ INTERNAL_API_SECRET และควรอยู่ private network. GET health/readiness เปิดเพื่อ probes; internal paths ไม่ถูก proxy ผ่าน Gateway
+API ของแต่ละ service ตรวจ `X-Internal-Key` เท่ากับ `INTERNAL_API_SECRET` การติดต่อระหว่าง services บน Vercel ใช้ HTTPS และ Gateway เป็นจุดรับคำขอจาก Browser เส้นทาง health/readiness เปิดสำหรับตรวจสถานะ ส่วน internal paths ไม่ถูก proxy ผ่าน Gateway
 
 | Service / path                          | Body                                                                                                 | Output                                                           |
 | --------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
@@ -41,4 +41,4 @@ Timeout 2.5 seconds, internal non-success -> dependency error; visit retry 3 att
 
 Error envelope `{error:{code,message,fields?}}`. Status 400 validation/JSON,401 auth,403 origin/internal access,404 not found/owner,409 collision/conflict,410 link unavailable,413 body limit,429 rate,503 controlled dependency/database failure. ไม่ส่ง SQL/stack/secret. X-Request-Id ส่งข้ามบริการเพื่อ correlation ไม่มี token/full IP ใน logs
 
-Limits: Register10/15min ต่อ IP, Login30/15min ต่อ IP, Create100/hour ต่อ verified user (DB atomic); Gateway600/minute สำหรับหนึ่ง replica. Retry-After เมื่อ limit. รักษา reverse proxy/IP limitation ตาม README
+Limits: Register10/15min ต่อ IP, Login30/15min ต่อ IP, Create100/hour ต่อ verified user (DB atomic); Gateway600/minute ต่อ instance ใน memory โดยตอบ `Retry-After` เมื่อถึง limit

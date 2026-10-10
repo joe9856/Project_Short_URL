@@ -39,13 +39,13 @@ npm run generate
 npm run migrate
 ```
 
-Migrations ใหม่สร้างตาราง PostgreSQL ในพื้นที่ของแต่ละ service ไม่ย้ายข้อมูล MySQL อัตโนมัติ ห้ามใช้ migrate reset กับ cloud Vercel build ทำ generate/build เท่านั้น ไม่รัน migration เพื่อไม่ให้ Preview เปลี่ยนตาราง Production หากใช้ Preview ให้ตั้งฐานข้อมูลและ secret แยก หรือยังไม่ deploy backend Preview จนกว่าจะมีค่าของ Preview ครบ
+Migrations สร้างตาราง PostgreSQL ในสคีมาของแต่ละ service Vercel build ทำ generate/build เท่านั้น ส่วน migrations รันแยกตามขั้นตอนนี้ หากใช้ Preview ให้ตั้งฐานข้อมูลและ secret แยกจาก Production
 
 ## 3. สร้าง Vercel projects
 
 Import repository เดียวกัน 5 ครั้ง เปิด **Include source files outside of the Root Directory in the Build Step** สำหรับ npm workspaces ตั้ง Node.js **22.x** และติดตั้ง development dependencies เพื่อใช้ Prisma CLI/TypeScript
 
-ทุก project ตั้ง `installCommand` ใน `vercel.json` เป็น `npm ci --include=dev` เพื่อให้เครื่องมือ build ติดตั้งแม้มี `NODE_ENV=production` และแต่ละ workspace ระบุ TypeScript/Node types ของตัวเอง ไม่พึ่ง devDependencies ของ repository root หากพบ `tsc: command not found` ให้ตรวจว่า deployment ใช้ commit ที่มีการตั้งค่านี้แล้ว
+ทุก project ตั้ง `installCommand` ใน `vercel.json` เป็น `npm ci --include=dev` เพื่อให้เครื่องมือ build ติดตั้งแม้มี `NODE_ENV=production` แต่ละ workspace ระบุ TypeScript/Node types ของตัวเอง
 
 | Project | Root Directory | Framework | Build command |
 |---|---|---|---|
@@ -88,8 +88,6 @@ npm run vercel:gateway -- https://YOUR-GATEWAY.vercel.app
 
 Browser เรียก API บน frontend domain เดียวกัน cookie session จึงอยู่ frontend domain ไม่ต้องเพิ่ม CORS หรือเก็บ token ใน localStorage Short URL/QR ใช้ APP_URL ของ frontend จึงต้องตรงกับ URL ที่ส่งผู้ตรวจ
 
-แพ็กเกจ `@short/routing` รองรับทั้ง CommonJS (`require`) ของ Gateway/Link Service และ ES Module (`import`) ของ Frontend/สคริปต์ โดยใช้กฎจาก `index.cjs` ชุดเดียวกัน หาก Runtime Logs แจ้ง `ERR_REQUIRE_ESM` จากแพ็กเกจนี้ ให้ deploy commit ที่มี conditional exports ใน `packages/routing/package.json` ใหม่บน Gateway, Link Service และ Frontend; ไม่ต้องแก้ฐานข้อมูล
-
 ## 6. ทดสอบ URL จริง
 
 1. สมัครสมาชิก/login แก้ชื่อใน /profile แล้ว refresh
@@ -101,14 +99,10 @@ Browser เรียก API บน frontend domain เดียวกัน cook
 
 Vercel ใช้ Functions ตามคำขอ มี cold start และไม่มี process ประจำสำหรับงานเบื้องหลัง จึงบันทึก click สำเร็จก่อนตอบ redirect Rate limit ของ Auth/Create ใช้ PostgreSQL ส่วน Gateway ใช้ memory ของแต่ละ instance ไม่ใช่โควตารวมทุก instance
 
-แยก deploy service ได้ แต่ PostgreSQL instance เดียวเป็นจุดพึ่งพาร่วม ถ้าฐานข้อมูลล่มทุก service ที่ใช้ DB จะกระทบ และ Analytics ล่มทำให้ GET redirect ตอบ 503 ตามนโยบายเก็บคลิกให้ครบ ควรอธิบาย dependency นี้ในการ Video Call
+แต่ละ service แยก deploy ได้ โดยใช้ PostgreSQL instance ร่วมกัน หากฐานข้อมูลไม่พร้อมจะกระทบบริการที่ใช้ฐานข้อมูล และหาก Analytics ไม่พร้อม GET redirect จะตอบ 503 ตามขั้นตอนยืนยันบันทึกคลิก ดู [รายละเอียด Architecture](architecture.md) และ [วิธีทดสอบระบบ](testing.md)
 
 ## อ้างอิง
 
 - [Express on Vercel](https://vercel.com/docs/frameworks/backend/express)
 - [Supabase connection modes](https://supabase.com/docs/guides/database/connecting-to-postgres)
 - [Prisma 6 on Vercel](https://www.prisma.io/docs/orm/v6/prisma-client/deployment/serverless/deploy-to-vercel)
-
-ยังไม่ได้ตรวจ quota หรือสิทธิ์ของบัญชี hosting จริง ต้องดู dashboard ของบัญชีก่อนส่งงาน
-
-Gateway reads x-vercel-forwarded-for only in Vercel runtime, validates the IP and strips it before forwarding. Through frontend rewrites the platform may identify a proxy IP; verify login rate limits with actual cloud traffic before increasing public usage.

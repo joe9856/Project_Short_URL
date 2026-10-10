@@ -84,7 +84,7 @@ npm run setup
 
 Frontend ในโหมดพัฒนาใช้ Vite proxy ไปยัง Gateway ที่พอร์ต 3000 จึงไม่ต้องสร้างไฟล์ `.env` ของ Frontend
 
-ใช้ `setup` สำหรับการติดตั้งครั้งแรก หากมี `.env` อยู่แล้ว สคริปต์จะหยุดเพื่อไม่เขียนทับค่าปัจจุบัน เก็บไฟล์เหล่านี้ไว้ในเครื่องและไม่ Push ขึ้น Git สำหรับการย้ายจาก MySQL เดิม ดู [คู่มือ PostgreSQL ในเครื่อง](docs/local-postgres.md)
+ใช้ `setup` สำหรับการติดตั้งครั้งแรก หากมี `.env` อยู่แล้ว สคริปต์จะหยุดเพื่อไม่เขียนทับค่าปัจจุบัน เก็บไฟล์เหล่านี้ไว้ในเครื่องและไม่ Push ขึ้น Git
 
 ### 4. เริ่ม PostgreSQL
 
@@ -240,12 +240,12 @@ Auth เก็บ Session Token แบบแฮชในฐานข้อมู
 
 บริการแยก deploy ได้ แต่ใช้ PostgreSQL instance ร่วมกัน และมีการพึ่งพาระหว่างบริการ เช่น Analytics ไม่พร้อมจะทำให้ GET redirect ตอบ 503 ดูรายละเอียดในเอกสาร Architecture
 
-## เอกสารเพิ่มเติม
+## เอกสารสำหรับตรวจงาน
 
-- [Architecture Explanation](docs/architecture.md)
-- [เอกสาร DFD แบบ Gane & Sarson แยก 6 กระบวนการ (เอกสารประกอบ)](docs/dfd.md)
+- [สารบัญเอกสารและเกณฑ์ตรวจงาน](docs/README.md)
+- [วิธีทดสอบฟังก์ชันและผลลัพธ์ที่คาดหวัง](docs/testing.md)
+- [Architecture และความสัมพันธ์ของข้อมูล](docs/architecture.md)
+- [คำอธิบาย DFD Level 0](docs/dfd.md)
 - [API Contract](docs/api.md)
-- [คู่มืออ่านโค้ด](docs/learning-guide.md)
-- [PostgreSQL ในเครื่อง](docs/local-postgres.md)
-- [สิ่งที่เปลี่ยนเมื่อใช้ PostgreSQL](docs/postgres-changes.md)
-- [ผลตรวจ PostgreSQL/Vercel](docs/postgres-verification.md)
+- [ติดตั้ง PostgreSQL ในเครื่อง](docs/local-postgres.md)
+- [Deploy บน Vercel + Supabase](docs/deployment.md)
