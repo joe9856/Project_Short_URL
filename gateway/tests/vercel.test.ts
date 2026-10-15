@@ -1,3 +1,4 @@
+// จำลอง Environment ของ Vercel → createGateway/guards → ตรวจการตั้ง HTTPS และ IP ที่ใช้ส่งต่อ Service
 import { describe, it, expect, afterEach, vi } from "vitest";
 import express from "express";
 import request from "supertest";
@@ -5,6 +6,7 @@ import { guards } from "../src/middlewares/guards";
 import { createGateway } from "../src/app";
 
 afterEach(() => vi.unstubAllEnvs());
+// แต่ละกรณีเรียกเพื่อสร้าง Express เล็ก ๆ → guards ตั้ง clientIp → ตอบ JSON ให้ Supertest ตรวจ
 function ipApplication() {
   const app = express();
   app.use(guards);

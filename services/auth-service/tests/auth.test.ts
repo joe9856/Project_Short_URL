@@ -1,3 +1,4 @@
+// Vitest รันไฟล์นี้: Supertest ส่ง Request เข้า app.ts/Route/Controller จริง แต่ Prisma เป็น Mock ไม่เขียน DB จริง
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import request from "supertest";
 import argon2 from "argon2";
@@ -22,7 +23,7 @@ const user = {
   email: "test@example.com",
   name: "ทดสอบ",
 };
-beforeEach(() => {
+beforeEach(() => { // ก่อนแต่ละกรณีล้างประวัติ Mock และเตรียม RateLimit ให้คำขอผ่านไปทดสอบ Controller
   vi.clearAllMocks();
   vi.mocked(prisma.rateLimit.upsert).mockResolvedValue({
     id: "rate",
@@ -56,6 +57,7 @@ describe("Auth service", () => {
       ).status,
     ).toBe(400);
   });
+  // POST register → Controller → registerUser → Mock Prisma; ตรวจ hash ที่ส่งไป DB ด้วย Argon2 จริง
   it("hashes passwords with Argon2id without exposing the hash", async () => {
     vi.mocked(prisma.user.create).mockResolvedValue({
       ...user,
@@ -74,6 +76,7 @@ describe("Auth service", () => {
       await argon2.verify(String(input.data.passwordHash), "password123"),
     ).toBe(true);
   });
+  // createSession รับ userId → Mock session.create; ตรวจว่า token จริงไม่ใช่ค่าที่เก็บ และ Cookie มีข้อกำหนด
   it("stores hashed tokens and sets protected cookies", async () => {
     vi.mocked(prisma.session.create).mockResolvedValue({
       tokenHash: "x",
@@ -87,6 +90,7 @@ describe("Auth service", () => {
     expect(sessionCookie(token)).toContain("HttpOnly");
     expect(sessionCookie(token)).toContain("SameSite=Lax");
   });
+  // ส่ง Cookie ว่าง/Session หมดอายุเข้า getUserFromSession → ต้อง reject 401 ให้ Controller ไม่คืนบัญชี
   it("rejects expired and missing sessions", async () => {
     await expect(getUserFromSession()).rejects.toMatchObject({ status: 401 });
     vi.mocked(prisma.session.findUnique).mockResolvedValue({

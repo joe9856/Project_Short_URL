@@ -2,22 +2,23 @@ import type { Request, Response, NextFunction } from "express";
 import { createHash } from "node:crypto";
 import { prisma } from "../lib/prisma";
 import { HttpError } from "../lib/http";
+// routes/index.ts ส่ง action/จำนวนสูงสุด/ช่วงวินาที → คืน Middleware ให้ Express เรียกก่อน Controller
 export function databaseRateLimit(
   action: string,
   limit: number,
   windowSeconds: number,
 ) {
-  return async function limitRequest(
+  return async function limitRequest( // รับ Request จริง → นับคำขอใน DB → ผ่านให้ next หรือโยน 429 เข้า errorHandler
     req: Request,
     res: Response,
     next: NextFunction,
   ) {
     const window = Math.floor(Date.now() / (windowSeconds * 1000));
-    const identity =
+    const identity = // สร้างลิงก์นับต่อ user จาก Session; Login/Register นับต่อ IP ที่ Gateway ส่งใน x-client-ip
       action === "create"
         ? String(res.locals.user.id)
         : req.get("x-client-ip") || req.ip || "unknown";
-    const id = createHash("sha256")
+    const id = createHash("sha256") // รวม action+ตัวตน+ช่วงเวลาเป็น key เดียว ใช้ค้น/สร้างแถว RateLimit
       .update(action + ":" + identity + ":" + window)
       .digest("hex");
     // upsert increment เป็น atomic ใน DB จึงใช้หลาย process ได้
@@ -32,7 +33,7 @@ export function databaseRateLimit(
     };
     let bucket;
     try {
-      bucket = await prisma.rateLimit.upsert(operation);
+      bucket = await prisma.rateLimit.upsert(operation); // ไม่มีแถวสร้าง count=1; มีแล้วเพิ่ม count และคืนยอดล่าสุด
     } catch (error) {
       // DB อาจชน UNIQUE เมื่อหลายคำขอเปิด bucket ใหม่พร้อมกัน ให้ retry หลัง rollback
       if (
@@ -44,7 +45,7 @@ export function databaseRateLimit(
         bucket = await prisma.rateLimit.upsert(operation);
       else throw error;
     }
-    if (bucket.count > limit) {
+    if (bucket.count > limit) { // เกินโควตาตอบ 429 ไม่ไป Controller; Retry-After แจ้งเวลารอให้ผู้เรียก
       res.setHeader("Retry-After", windowSeconds);
       throw new HttpError(
         429,
@@ -52,6 +53,6 @@ export function databaseRateLimit(
         "ส่งคำขอบ่อยเกินไป กรุณารอสักครู่",
       );
     }
-    next();
+    next(); // ไม่เกินโควตา → Controller ของ Route ทำงานต่อ เช่น register/login/create
   };
 }

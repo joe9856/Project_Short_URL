@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import type { User } from "../types/api";
 
+// App ส่ง user/logout/busy → เมนูแสดงตามบัญชี; กด Logout → callback App.logout → api.ts → Auth controller.logout
 export function Navigation({
   user,
   onLogout,
@@ -28,12 +29,14 @@ export function Navigation({
           Short URL<span className="brand-dot">.</span>
         </Link>
         <nav className="header-nav" aria-label="เมนูหลัก">
+          {/* มี user แสดงเมนูสมาชิก; ไม่มีแสดง Login/Register การซ่อนเมนูไม่ได้แทนการตรวจสิทธิ์ Backend */}
           {user ? (
             <>
               <NavLink to="/dashboard" className="nav-link">
                 <LayoutDashboard size={18} aria-hidden="true" />
                 แดชบอร์ด
               </NavLink>
+              {/* NavLink เปลี่ยน Frontend Route และมีสถานะ active เมื่อ path ตรง; App เลือกหน้าที่แสดง */}
               <NavLink to="/history" className="nav-link">
                 ประวัติ
               </NavLink>
@@ -50,6 +53,7 @@ export function Navigation({
                 <span className="account-name">{user.name}</span>
                 <span className="account-label">บัญชี</span>
               </NavLink>
+              {/* ส่งฟังก์ชันไว้ให้ onClick เรียกตอนกด; busy ปิดปุ่มระหว่าง Logout */}
               <button
                 className="btn btn-secondary"
                 aria-label="ออกจากระบบ"
@@ -78,6 +82,7 @@ export function Navigation({
 
 // ใช้กรอบเดียวกันทุกหน้าจัดการ เพื่อให้เมนูและตำแหน่งเนื้อหาคงที่
 export function Workspace({ children }: { children: ReactNode }) {
+  // children คือเนื้อหาที่ App ใส่ระหว่าง <Workspace>...</Workspace> เช่นหน้า History
   return (
     <div className="workspace">
       <aside className="sidebar">
@@ -87,6 +92,7 @@ export function Workspace({ children }: { children: ReactNode }) {
             <LayoutDashboard size={18} aria-hidden="true" />
             แดชบอร์ด
           </NavLink>
+          {/* ไปหน้า Dashboard พร้อม hash #create ให้ Effect ใน App เลื่อนไปส่วนสร้างลิงก์ */}
           <Link className="sidebar-item" to="/dashboard#create">
             <Plus size={18} aria-hidden="true" />
             สร้างลิงก์
@@ -111,6 +117,7 @@ export function Workspace({ children }: { children: ReactNode }) {
         </p>
       </aside>
       <main id="main" className="workspace-main">
+        {/* วางเนื้อหาของหน้าที่เลือกไว้ข้าง Sidebar */}
         {children}
       </main>
     </div>

@@ -1,3 +1,4 @@
+// npm run generate → Prisma อ่าน Schema นี้ → สร้าง generated/client → src/lib/prisma.ts → Service เรียก ORM
 generator client {
   provider = "prisma-client-js"
   output = "../generated/client"
@@ -8,23 +9,27 @@ datasource db {
   url = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
+// registerUser INSERT / loginUser SELECT / updateUserName UPDATE → ตาราง users ของ Auth Service
 model User {
   id String @id @default(uuid()) @db.VarChar(36)
   email String @unique @db.VarChar(254)
   name String @db.VarChar(80)
-  passwordHash String @db.VarChar(255)
+  passwordHash String @db.VarChar(255) // Argon2id จาก registerUser; loginUser ใช้ตรวจ ไม่ส่งกลับ Frontend
   createdAt DateTime @default(now()) @db.Timestamptz(3)
   sessions Session[]
   @@map("users")
 }
+// createSession เก็บ hash ของ token; getUserFromSession ค้นพร้อม user; logoutSession ลบแถวนี้
 model Session {
   tokenHash String @id @db.VarChar(64)
   userId String @db.VarChar(36)
   expiresAt DateTime @db.Timestamptz(3)
-  user User @relation(fields:[userId], references:[id], onDelete:Cascade)
+  user User @relation(fields:[userId], references:[id], onDelete:Cascade) // FK ไป User; ลบบัญชีลบ Session ตาม
   @@index([expiresAt])
   @@map("sessions")
-}model RateLimit {
+}
+// Middleware databaseRateLimit upsert ตัวนับตาม action/IP/ช่วงเวลา ก่อนเข้า Controller Login/Register
+model RateLimit {
   id String @id @db.VarChar(64)
   count Int @default(0)
   expiresAt DateTime @db.Timestamptz(3)

@@ -17,6 +17,7 @@ import {
 import { api, errorText } from "../services/api";
 import type { Stats } from "../types/api";
 import { Feedback } from "./Feedback";
+// รับ Props จาก Dashboard/LinkDetails: id เลือกสถิติลิงก์เดียว; ไม่มี id ใช้สถิติรวม
 export function Analytics({
   id,
   refresh = 0,
@@ -26,6 +27,7 @@ export function Analytics({
   refresh?: number;
   showSummary?: boolean;
 }) {
+  // วันที่เริ่มต้นย้อนหลัง 29 วัน รวมวันนี้เป็น 30 วัน; บวก 7 ชั่วโมงเพื่อเลือกวันที่ตามเวลาไทย
   const [from, setFrom] = useState(
     new Date(Date.now() - 29 * 86400000 + 7 * 3600000)
       .toISOString()
@@ -34,16 +36,18 @@ export function Analytics({
   const [to, setTo] = useState(
     new Date(Date.now() + 7 * 3600000).toISOString().slice(0, 10),
   );
-  const [range, setRange] = useState({ from, to });
+  const [range, setRange] = useState({ from, to }); // ช่วงที่ใช้เรียก API จริง แยกจากวันที่ที่กำลังกรอก
   const [stats, setStats] = useState<Stats | null>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
   const [retry, setRetry] = useState(0);
+  // Callback ทำงานหลัง React อัปเดตหน้าจอครั้งแรก และเมื่อ dependency ท้าย Effect เปลี่ยน
   useEffect(() => {
     const controller = new AbortController();
     setLoading(true);
     setError("");
-    const path = id ? `/api/links/${id}/stats` : "/api/stats";
+    const path = id ? `/api/links/${id}/stats` : "/api/stats"; // เลือก Backend Route ตามขอบเขตสถิติ
+    // from/to เป็น query → Gateway → Analytics controller.stats → statistics/Prisma → { stats } กลับ setStats เพื่อแสดงกราฟ
     api<{ stats: Stats }>(`${path}?${new URLSearchParams(range)}`, {
       signal: controller.signal,
     })
@@ -54,11 +58,11 @@ export function Analytics({
       .finally(() => {
         if (!controller.signal.aborted) setLoading(false);
       });
-    return () => controller.abort();
+    return () => controller.abort(); // Cleanup ยกเลิกคำขอเดิมก่อน Effect รอบใหม่หรือเมื่อถอด Component
   }, [range, id, refresh, retry]);
   function submit(event: FormEvent) {
-    event.preventDefault();
-    setRange({ from, to });
+    event.preventDefault(); // ไม่ให้การ Submit รีโหลดทั้งหน้า
+    setRange({ from, to }); // กดดูสถิติแล้วจึงเปลี่ยน range เพื่อให้ Effect ดึงข้อมูล
   }
   const labels: Record<string, string> = {
     direct: "เปิดโดยตรง",
@@ -69,6 +73,7 @@ export function Analytics({
   };
   return (
     <>
+      {/* แสดงการ์ดสรุปเมื่อผู้เรียกเปิด showSummary และมีข้อมูลแล้ว */}
       {showSummary && stats && (
         <div className="summary-grid metrics">
           {[
@@ -126,6 +131,7 @@ export function Analytics({
           </div>
           <button className="btn btn-secondary">ดูสถิติ</button>
         </form>
+        {/* เลือกแสดงสถานะโหลด → ข้อผิดพลาดพร้อมลองใหม่ → ข้อมูล ตามเงื่อนไข */}
         {loading ? (
           <Feedback loading />
         ) : error ? (
@@ -154,6 +160,7 @@ export function Analytics({
                 role="img"
                 aria-label={`กราฟคลิกรายวัน รวม ${stats.totalClicks} คลิก`}
               >
+                {/* clicksByDate เป็นข้อมูลกราฟ: date คือแกน X และ clicks คือจำนวนบนแกน Y */}
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart
                     data={stats.clicksByDate}
@@ -185,6 +192,7 @@ export function Analytics({
                   ยังไม่มีการเปิดลิงก์ในช่วงวันที่นี้
                 </p>
               )}
+              {/* map วนข้อมูลจาก API เป็นรายการแหล่งที่มาและอุปกรณ์; labels แปลชื่อที่รู้จัก */}
               <div className="breakdown-grid">
                 {[
                   { title: "แหล่งที่มา", rows: stats.sources },
@@ -209,6 +217,7 @@ export function Analytics({
                   </div>
                 ))}
               </div>
+              {/* ใช้ข้อมูลชุดเดียวกับกราฟมาแสดงเป็นตารางรายวัน */}
               <details className="advanced-options">
                 <summary>ดูข้อมูลรายวันแบบตาราง</summary>
                 <table className="daily-table">

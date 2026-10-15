@@ -1,13 +1,14 @@
 import { useId } from "react";
 import { ArrowUpRight, Link2, QrCode } from "lucide-react";
 
+// Home/Dashboard ส่ง headingLevel → เลือก tag หัวข้อ → คืน JSX ส่วนแนะนำ; ข้อมูลคงที่ ไม่มี API/ฐานข้อมูลใน Component นี้
 export function ShortUrlHero({
   headingLevel = "h1",
 }: {
   headingLevel?: "h1" | "h2";
 }) {
-  const titleId = useId();
-  const Heading = headingLevel;
+  const titleId = useId(); // สร้าง id สำหรับเชื่อม aria-labelledby กับหัวข้อ ให้เครื่องอ่านหน้าจอรู้ชื่อส่วนนี้
+  const Heading = headingLevel; // เลือก tag h1 หรือ h2; ใช้ตัวแปรตัวใหญ่ใน JSX เป็น <Heading>
   return (
     <section className="home-heading" aria-labelledby={titleId}>
       <div className="home-heading-copy">
@@ -28,6 +29,7 @@ export function ShortUrlHero({
           พร้อมติดตามทุกการเปิดในที่เดียว
         </p>
       </div>
+      {/* ภาพ QR และ short.link/hello เป็นตัวอย่างตกแต่ง ไม่ใช่ QR หรือลิงก์ที่สร้างจาก API */}
       <div className="home-share-art" aria-hidden="true">
         <div className="home-qr-frame">
           <span className="home-art-label">SCAN & SHARE</span>

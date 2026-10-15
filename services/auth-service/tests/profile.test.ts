@@ -1,3 +1,4 @@
+// ทดสอบ PATCH โปรไฟล์ผ่าน app/Controller จริง; Mock Prisma เพื่อเช็กว่าเลือกเจ้าของจาก Cookie ไม่ใช่ข้อมูลที่ผู้ใช้ส่ง
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import request from "supertest";
 
@@ -18,6 +19,7 @@ const user = {
 };
 const token = "short_session=" + "a".repeat(64);
 
+// แต่ละ it ส่ง Body/Cookie/Origin มา → Supertest เข้า /api/auth/me → คืน Response ให้ expect ตรวจ
 function patch(
   body: unknown,
   cookie = token,
@@ -30,7 +32,7 @@ function patch(
     .set("Cookie", cookie)
     .send(body);
 }
-beforeEach(() => {
+beforeEach(() => { // เตรียม Mock Session ที่ยังไม่หมดอายุและผล UPDATE สำหรับแต่ละกรณี
   vi.resetAllMocks();
   vi.mocked(prisma.session.findUnique).mockResolvedValue({
     tokenHash: "hash",
@@ -44,6 +46,7 @@ beforeEach(() => {
   } as never);
 });
 describe("Edit own display name", () => {
+  // ส่งชื่อมีช่องว่างพร้อม Header ปลอม → Controller trim → updateUserName ใช้ Session owner → ตรวจ query/JSON
   it("updates only the session owner, trims the name and returns safe fields", async () => {
     const response = await patch({ name: "  ชื่อใหม่  " }).set(
       "x-user-id",

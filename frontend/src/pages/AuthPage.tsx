@@ -5,6 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { api, errorText } from "../services/api";
 import type { User } from "../types/api";
 import { Feedback } from "../components/Feedback";
+// App ใช้หน้าเดียวกันสำหรับ Login/Register; register เลือกโหมด และ onLogin ส่งผู้ใช้กลับไปอัปเดต App
 export function AuthPage({
   register,
   onLogin,
@@ -12,32 +13,36 @@ export function AuthPage({
   register?: boolean;
   onLogin: (user: User) => void;
 }) {
+  // State เก็บค่าฟอร์มและสถานะคำขอ; พิมพ์ข้อมูลยังไม่เรียก API
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  // Submit → สมัครสมาชิกถ้าจำเป็น → Login → อัปเดตผู้ใช้ใน App → เปลี่ยนหน้า Dashboard
   async function submit(event: FormEvent) {
-    event.preventDefault();
+    event.preventDefault(); // ไม่ให้เบราว์เซอร์ส่งฟอร์มแบบรีโหลดหน้า
     setError("");
     setLoading(true);
     try {
-      if (register)
+      // api.ts → Gateway → Auth controller.register → registerUser/Prisma → รอสร้างบัญชีแล้วจึง Login ต่อ
+      if (register) // โหมดสมัครสมาชิกต้องรอสร้างบัญชีสำเร็จก่อน; ถ้าผิดพลาดจะไป catch ไม่ทำ Login ต่อ
         await api("/api/auth/register", {
           method: "POST",
           body: JSON.stringify({ name, email, password }),
         });
+      // POST → Auth controller.login → loginUser + createSession → { user } และ Cookie; result.user ส่งกลับ App ผ่าน onLogin
       const result = await api<{ user: User }>("/api/auth/login", {
         method: "POST",
         body: JSON.stringify({ email, password }),
       });
-      onLogin(result.user);
-      navigate("/dashboard");
+      onLogin(result.user); // เรียก callback ที่ App ส่งมา เพื่อให้เมนูและหน้าส่วนตัวรู้ว่า Login แล้ว
+      navigate("/dashboard"); // เปลี่ยน Frontend Route หลัง Login สำเร็จ
     } catch (error) {
       setError(errorText(error));
     } finally {
-      setLoading(false);
+      setLoading(false); // finally ทำงานเมื่อจบทั้งกรณีสำเร็จและผิดพลาด เพื่อเปิดปุ่มอีกครั้ง
     }
   }
   return (
@@ -53,6 +58,7 @@ export function AuthPage({
             ? "สร้างบัญชีเพื่อย่อลิงก์และติดตามสถิติ"
             : "เข้าสู่ระบบเพื่อจัดการลิงก์ของคุณ"}
         </p>
+        {/* ช่อง value/onChange เชื่อมกับ State; register && แสดงช่องชื่อเฉพาะหน้าสมัครสมาชิก */}
         <form className="auth-form" onSubmit={submit}>
           {register && (
             <div>

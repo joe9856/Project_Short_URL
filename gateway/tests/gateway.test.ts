@@ -1,9 +1,11 @@
+// ทดสอบ Gateway ผ่าน HTTP จริงในเครื่อง: fakeService แทน Auth/Link/Analytics แล้วตรวจ path/Headers/Response ที่ Proxy ส่ง
 import { beforeEach,afterEach,describe,it,expect } from 'vitest';
 import express from 'express';
 import type { Server } from 'node:http';
 import request from 'supertest';
 import { createGateway } from '../src/app';
 let servers:Server[]=[];
+// beforeEach ส่งชื่อ Service → เปิด Express พอร์ตว่าง → คืน URL ให้ createGateway ใช้เป็น target
 async function fakeService(name:string) {
   const app=express();app.use(express.json());
   app.post('/internal/sessions/verify',(req,res)=>{if(req.headers.cookie==='short_session=valid')res.json({user:{id:'verified'}});else res.status(401).json({error:{code:'UNAUTHORIZED'}});});
@@ -13,8 +15,10 @@ async function fakeService(name:string) {
   const server=await new Promise<Server>(resolve=>{const instance=app.listen(0,'127.0.0.1',()=>resolve(instance));});servers.push(server);
   const address=server.address();if(!address || typeof address==='string')throw new Error('Missing port');return 'http://127.0.0.1:'+address.port;
 }
+// ก่อนแต่ละกรณีสร้างปลายทางจำลองสามตัว; afterEach ปิด server ทั้งหมดเพื่อไม่ค้างพอร์ต
 beforeEach(async()=>{process.env.AUTH_SERVICE_URL=await fakeService('auth');process.env.LINK_SERVICE_URL=await fakeService('links');process.env.ANALYTICS_SERVICE_URL=await fakeService('analytics');});
 afterEach(async()=>{await Promise.all(servers.map(server=>new Promise<void>(resolve=>server.close(()=>resolve()))));servers=[];});
+// แต่ละ it ส่ง Request ด้วย Supertest → guards/verifySession/Proxy → fakeService → JSON/302 กลับให้ expect ตรวจ
 describe('Gateway real HTTP proxy',()=>{
   it('routes stats before links and preserves query/cookies',async()=>{const app=createGateway();const response=await request(app).get('/api/links/abc/stats?from=2026-10-01').set('Cookie','short_session=valid');expect(response.status).toBe(200);expect(response.body.service).toBe('analytics');expect(response.body.path).toBe('/api/links/abc/stats?from=2026-10-01');expect(response.body.cookie).toBe('short_session=valid');expect(response.headers['set-cookie'][0]).toContain('HttpOnly');});
   it('routes auth, links and general stats',async()=>{for(const [path,service] of [['/api/auth/me','auth'],['/api/links','links'],['/api/stats','analytics']]) {const response=await request(createGateway()).get(path).set('Cookie','short_session=valid');expect(response.body.service).toBe(service);}});

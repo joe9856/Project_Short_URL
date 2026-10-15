@@ -1,7 +1,9 @@
+/* main.tsx import ไฟล์นี้ → Vite/PostCSS สร้าง CSS → Browser ใช้ class จาก JSX จัดหน้าจอ; CSS ไม่เรียก API */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ตัวแปรสี/ขนาด/ฟอนต์ให้ selectors ด้านล่างใช้ร่วมกันผ่าน var(...) */
 :root {
   --color-primary: #c92720;
   --color-primary-hover: #a61f19;
@@ -70,6 +72,7 @@ body {
 .summary-card svg {
   color: var(--color-text-muted);
 }
+/* History.tsx ส่ง class กลุ่มนี้ให้ช่องค้นหา ตัวกรอง และแถวประวัติที่ map จากข้อมูล API */
 .history-tools {
   display: flex;
   gap: 12px;
@@ -148,6 +151,7 @@ body {
   max-width: 200px;
   min-width: 0;
 }
+/* Analytics.tsx ใช้พื้นที่กราฟนี้ครอบ ResponsiveContainer เพื่อกำหนดขนาดแสดงข้อมูล stats */
 .chart {
   width: 100%;
   height: 260px;
@@ -392,6 +396,7 @@ button:disabled {
   max-width: 160px;
   overflow-wrap: anywhere;
 }
+/* Components ใส่ class btn และ prop disabled; selectors :disabled แสดงหน้าตาปุ่ม แต่ JSX เป็นตัวกำหนดการกดได้ */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -708,6 +713,7 @@ summary {
   overflow-wrap: anywhere;
   word-break: break-word;
 }
+/* LinkResult.tsx แสดงรูปจาก img.src; CSS นี้จัดกรอบภาพและปุ่ม ไม่ได้สร้างข้อมูล QR */
 .qr-panel {
   text-align: center;
   min-width: 0;
@@ -778,6 +784,7 @@ summary {
   display: grid;
   gap: 16px;
 }
+/* Workspace ใน Navigation.tsx ครอบ children จาก App: แบ่ง Sidebar กับ Page ที่เลือกตาม path */
 .workspace {
   display: flex;
   min-height: calc(100vh - 73px);
@@ -1274,6 +1281,7 @@ td {
     font-size: 13px;
   }
 }
+/* Browser แจ้งผู้ใช้ต้องการลดการเคลื่อนไหว → ปรับ animation/transition ตามกฎในกลุ่มนี้ */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

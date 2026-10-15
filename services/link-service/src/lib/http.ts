@@ -3,6 +3,7 @@ import { timingSafeEqual, randomUUID } from "node:crypto";
 import { ZodError } from "zod";
 import { config } from "./config";
 
+// Middleware/Service โยน status/code/message → errorHandler อ่านแล้วตอบ JSON → api.ts หรือ internalPost รับข้อผิดพลาด
 export class HttpError extends Error {
   constructor(
     public status: number,
@@ -12,6 +13,7 @@ export class HttpError extends Error {
     super(message);
   }
 }
+// app.ts เรียกก่อน Router: รับ x-internal-key จาก Gateway/Service และเทียบกับ config.secret; ผ่านจึง next()
 export function internalGuard(
   req: Request,
   _res: Response,
@@ -33,6 +35,7 @@ export function internalGuard(
   }
   next();
 }
+// รับ Method/path/origin ของ Request; API ที่แก้ข้อมูลต้องมาจากหน้าเว็บที่ตั้งไว้ ไม่ผ่านโยน 403
 export function originGuard(req: Request, _res: Response, next: NextFunction) {
   if (
     ["POST", "PATCH", "PUT", "DELETE"].includes(req.method) &&
@@ -43,6 +46,7 @@ export function originGuard(req: Request, _res: Response, next: NextFunction) {
   }
   next();
 }
+// app.ts เรียกทุก Request: ส่ง X-Request-Id ให้ Controller ใช้ติดตามและส่งต่อ HTTP ไป Service อื่น
 export function requestHeaders(
   req: Request,
   res: Response,
@@ -55,13 +59,14 @@ export function requestHeaders(
   res.setHeader("X-Request-Id", requestId);
   next();
 }
+// Express ส่งข้อผิดพลาดจากขั้นก่อนหน้ามาที่นี่ → JSON รูปแบบ { error: { code, message, fields? } } กลับผู้เรียก
 export function errorHandler(
   error: unknown,
   _req: Request,
   res: Response,
   _next: NextFunction,
 ) {
-  if (error instanceof ZodError) {
+  if (error instanceof ZodError) { // schema.parse ไม่ผ่าน → 400 พร้อมข้อความรายช่องให้ frontend/api.ts รวมข้อความ
     res.status(400).json({
       error: {
         code: "VALIDATION_ERROR",
@@ -71,7 +76,7 @@ export function errorHandler(
     });
     return;
   }
-  if (error instanceof HttpError) {
+  if (error instanceof HttpError) { // ข้อผิดพลาดที่ระบบกำหนดไว้ → ใช้ status/code/message เดิม
     res
       .status(error.status)
       .json({ error: { code: error.code, message: error.message } });
@@ -109,6 +114,8 @@ export function errorHandler(
     },
   });
 }
+// ตัวช่วยฝั่ง Backend: ผู้เรียกส่ง url/body/Cookie/requestId → POST ไป Service อื่น → คืน JSON ให้ await ของผู้เรียก
+// requireSession → Auth; services/links.ts listLinks → Analytics click-counts; redirectDestination → Analytics visits
 export async function internalPost(
   url: string,
   body: object,
@@ -125,7 +132,7 @@ export async function internalPost(
         ...(cookie ? { cookie } : {}),
         ...(requestId ? { "x-request-id": requestId } : {}),
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(body), // object จาก Service ผู้เรียก → JSON ที่ Controller ปลายทางอ่านผ่าน req.body
       signal: AbortSignal.timeout(config.production ? 10000 : 2500),
     });
   } catch {
@@ -135,6 +142,7 @@ export async function internalPost(
       "บริการที่เกี่ยวข้องไม่พร้อมใช้งาน",
     );
   }
+  // Response จากปลายทางไม่สำเร็จ → โยน HttpError ให้ผู้เรียกหยุดงาน หรือจัดการ Retry ก่อนเข้า errorHandler
   if (response.status === 401)
     throw new HttpError(401, "UNAUTHORIZED", "กรุณาเข้าสู่ระบบ");
   if (response.status === 404)
@@ -145,5 +153,5 @@ export async function internalPost(
       "DEPENDENCY_UNAVAILABLE",
       "บริการที่เกี่ยวข้องไม่พร้อมใช้งาน",
     );
-  return response.json();
+  return response.json(); // JSON ปลายทาง → Service ผู้เรียก; ผู้เรียกใช้ Zod ตรวจรูปแบบที่คาดไว้ต่อ
 }

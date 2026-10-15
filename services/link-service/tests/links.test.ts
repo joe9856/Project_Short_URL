@@ -1,3 +1,4 @@
+// ทดสอบฟังก์ชัน Link/Route ด้วย Prisma และ HTTP ไป Analytics แบบ Mock; ส่วน QR สร้างและถอดรหัสภาพจริง
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import request from "supertest";
 import jsQR from "jsqr";
@@ -41,7 +42,7 @@ const link = {
   createdAt: new Date(),
   updatedAt: new Date(),
 };
-beforeEach(() => {
+beforeEach(() => { // ล้าง Mock และให้ findUnique คืนลิงก์ตัวอย่าง ก่อนแต่ละกรณี
   vi.clearAllMocks();
   vi.mocked(prisma.link.findUnique).mockResolvedValue(link);
 });
@@ -98,6 +99,7 @@ describe("Link service", () => {
     expect(root.status).toBe(404);
     expect(prisma.link.findUnique).not.toHaveBeenCalled();
   });
+  // createLink → Mock INSERT ชน Unique → ต้องลองใหม่สำหรับรหัสสุ่ม แต่ alias ผู้ใช้ซ้ำต้องตอบข้อผิดพลาด 409
   it("retries generated collisions and rejects duplicate aliases", async () => {
     vi.mocked(prisma.link.create)
       .mockRejectedValueOnce({ code: "P2002" })
@@ -154,6 +156,7 @@ describe("Link service", () => {
     ).rejects.toMatchObject({ status: 404 });
     expect(fetchMock).not.toHaveBeenCalled();
   });
+  // redirectDestination → Mock Analytics ครั้งแรก timeout ครั้งสองยืนยัน → ตรวจ eventId เดิมและคืน originalUrl หลังยืนยัน
   it("retries with the same eventId and only redirects after acknowledgment", async () => {
     const fetchMock = vi
       .fn()
@@ -186,6 +189,7 @@ describe("Link service", () => {
     expect(response.headers.location).toBeUndefined();
     expect(response.headers["cache-control"]).toBe("no-store");
   });
+  // generateQr สร้างภาพจริง → PNG.sync.read อ่าน pixels → jsQR ถอดกลับเป็น URL → ตรวจว่าเป็น Short URL และมีขอบขาว
   it("QR PNG and SVG encode the short URL and preserve quiet zone", async () => {
     const svg = await generateQr(link, "svg");
     const png = await generateQr(link, "png");

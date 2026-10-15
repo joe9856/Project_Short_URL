@@ -1,3 +1,4 @@
+// npm run generate → Prisma สร้าง generated/client → lib/prisma.ts → Analytics Service อ่าน/เขียน PostgreSQL
 generator client {
   provider = "prisma-client-js"
   output = "../generated/client"
@@ -8,9 +9,11 @@ datasource db {
   url = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
+// Link Service ส่ง event ทาง HTTP → recordClick INSERT; clickCounts/statistics นับและจัดกลุ่มเพื่อ History/กราฟ
+// linkId/ownerId เป็นรหัสอ้างอิงข้าม Service ไม่มี FK ข้าม DB; statistics ตรวจเจ้าของผ่าน Link Service
 model ClickEvent {
   id String @id @default(uuid()) @db.VarChar(36)
-  eventId String @unique @db.VarChar(36)
+  eventId String @unique @db.VarChar(36) // event เดิมจาก Retry บันทึกได้ครั้งเดียว แม้ส่ง /internal/visits ซ้ำ
   linkId String @db.VarChar(36)
   ownerId String @db.VarChar(36)
   clickedAt DateTime @db.Timestamptz(3)

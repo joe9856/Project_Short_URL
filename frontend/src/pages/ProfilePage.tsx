@@ -4,6 +4,7 @@ import type { User } from "../types/api";
 import { api, errorText } from "../services/api";
 import { Feedback } from "../components/Feedback";
 
+// App ส่ง user ปัจจุบันมาให้แก้ชื่อ และรับผลกลับผ่าน onUpdated เพื่ออัปเดตเมนู/แดชบอร์ด
 export function ProfilePage({
   user,
   onUpdated,
@@ -11,34 +12,35 @@ export function ProfilePage({
   user: User;
   onUpdated: (user: User) => void;
 }) {
-  const [name, setName] = useState(user.name);
+  const [name, setName] = useState(user.name); // ใช้ชื่อจาก Props เป็นค่าเริ่มต้นของ State ในฟอร์ม
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [saved, setSaved] = useState(false);
 
+  // ส่งฟอร์มแล้วจึงบันทึกชื่อผ่าน PATCH /api/auth/me
   async function save(event: FormEvent) {
     event.preventDefault();
     setError("");
     setSaved(false);
-    const trimmedName = name.trim();
-    if (!trimmedName) {
+    const trimmedName = name.trim(); // ตัดช่องว่างหัวท้ายก่อนตรวจและส่งข้อมูล
+    if (!trimmedName) { // ไม่มีชื่อให้หยุดก่อนเรียก API
       setError("กรุณากรอกชื่อ");
       return;
     }
     setSaving(true);
     try {
-      // ส่งเพียงชื่อ ส่วนบัญชีที่ต้องแก้ไขจะอ่านจาก session บน Auth Service
+      // api.ts → Gateway → Auth controller.updateProfile → updateUserName/Prisma → { user } กลับมา; เจ้าของอ่านจาก Session
       const result = await api<{ user: User }>("/api/auth/me", {
         method: "PATCH",
         body: JSON.stringify({ name: trimmedName }),
       });
       setName(result.user.name);
-      onUpdated(result.user);
+      onUpdated(result.user); // ส่งข้อมูลที่ Backend ยืนยันแล้วกลับไปให้ App อัปเดต user
       setSaved(true);
     } catch (error) {
       setError(errorText(error));
     } finally {
-      setSaving(false);
+      setSaving(false); // จบสถานะบันทึกทั้งกรณีสำเร็จและผิดพลาด
     }
   }
 
@@ -61,6 +63,7 @@ export function ProfilePage({
           <dt>อีเมลบัญชี</dt>
           <dd className="selectable-text">{user.email}</dd>
         </dl>
+        {/* พิมพ์ชื่อเปลี่ยนเฉพาะ State และล้างข้อความเก่า; กดบันทึกจึงเรียก save */}
         <form className="profile-form" onSubmit={save} aria-busy={saving}>
           <div>
             <label htmlFor="profile-name">ชื่อของคุณ</label>
@@ -89,6 +92,7 @@ export function ProfilePage({
               {saving ? "กำลังบันทึก…" : "บันทึกชื่อ"}
             </button>
           </div>
+          {/* แสดงข้อความนี้เมื่อ API บันทึกสำเร็จเท่านั้น */}
           {saved && (
             <p role="status" className="success-text">
               บันทึกชื่อเรียบร้อยแล้ว

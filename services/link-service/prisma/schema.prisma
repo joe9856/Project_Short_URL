@@ -1,3 +1,4 @@
+// npm run generate → Prisma สร้าง generated/client จาก Schema นี้ → src/lib/prisma.ts → services/links.ts ใช้ ORM
 generator client {
   provider = "prisma-client-js"
   output = "../generated/client"
@@ -8,18 +9,22 @@ datasource db {
   url = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
+// createLink INSERT / ownedLink,listLinks,redirectDestination SELECT / updateLink UPDATE → ตาราง links
+// userId อ้างบัญชีใน Auth ทางข้อมูล ไม่มี FK ข้าม Service; ตรวจตัวตนผ่าน HTTP ไป Auth
 model Link {
   id String @id @default(uuid()) @db.VarChar(36)
   userId String @db.VarChar(36)
   originalUrl String @db.Text
-  code String @unique @db.VarChar(32)
+  code String @unique @db.VarChar(32) // รหัสคู่ originalUrl; Unique กันรหัสซ้ำให้ createLink จัดการ P2002/Retry
   isActive Boolean @default(true)
   expiresAt DateTime? @db.Timestamptz(3)
   createdAt DateTime @default(now()) @db.Timestamptz(3)
   updatedAt DateTime @updatedAt @db.Timestamptz(3)
   @@index([userId, createdAt])
   @@map("links")
-}model RateLimit {
+}
+// Middleware databaseRateLimit นับการสร้างตาม user/ช่วงเวลา ก่อน controller.create
+model RateLimit {
   id String @id @db.VarChar(64)
   count Int @default(0)
   expiresAt DateTime @db.Timestamptz(3)

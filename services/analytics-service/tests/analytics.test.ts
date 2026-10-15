@@ -1,3 +1,4 @@
+// Vitest เรียก Service/Route Analytics ด้วย Prisma และ fetch แบบ Mock; ตรวจ event/การนับ/วันที่ ไม่ใช้ DB จริง
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import request from "supertest";
 vi.mock("../src/lib/prisma", () => ({
@@ -21,9 +22,10 @@ const event = {
   deviceType: "desktop" as const,
   referrerHost: "direct",
 };
-beforeEach(() => vi.clearAllMocks());
-afterEach(() => vi.unstubAllGlobals());
+beforeEach(() => vi.clearAllMocks()); // ล้างการเรียก Mock ก่อนกรณีถัดไป
+afterEach(() => vi.unstubAllGlobals()); // คืน fetch/global ที่กรณีทดสอบเคยแทนไว้
 describe("Analytics service", () => {
+  // event → recordClick → Mock INSERT; ส่ง eventId เดิมซ้ำและข้อมูลเดิมต้องยังได้ recorded:true โดยไม่เพิ่มแถว
   it("persists before acknowledging and accepts exact replay", async () => {
     vi.mocked(prisma.clickEvent.create).mockResolvedValue({
       ...event,
@@ -51,6 +53,7 @@ describe("Analytics service", () => {
     vi.mocked(prisma.clickEvent.create).mockRejectedValue(new Error("DB down"));
     await expect(recordClick(event)).rejects.toThrow("DB down");
   });
+  // ownerId/linkIds → clickCounts → Mock GROUP BY → ตรวจ { counts } และเงื่อนไขเจ้าของที่ส่งไป Prisma
   it("filters counts by owner in a single batch", async () => {
     vi.mocked(prisma.clickEvent.groupBy).mockResolvedValue([
       { linkId: event.linkId, _count: { _all: 3 } },
@@ -80,6 +83,7 @@ describe("Analytics service", () => {
       ).status,
     ).toBe(400);
   });
+  // from/to → dateRange → start/end UTC; ตรวจว่าเส้นแบ่งวันไทยตรงและ end เป็นวันถัดไปแบบไม่รวมขอบ
   it("uses Bangkok day boundaries with an exclusive end", () => {
     expect(bangkokDay(new Date("2026-10-08T17:00:00Z"))).toBe("2026-10-09");
     const range = dateRange("2026-10-09", "2026-10-09");

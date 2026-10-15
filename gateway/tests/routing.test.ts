@@ -1,3 +1,4 @@
+// อ่านกฎ packages/routing + path จาก App.tsx + frontend/vercel.json → ตรวจว่า Short URL ไม่แย่งเส้นทางหน้าจอ/API/ไฟล์
 import { readFileSync } from "node:fs";
 import { execFileSync } from "node:child_process";
 import { resolve } from "node:path";
@@ -6,7 +7,7 @@ import { isReservedName, rootShortLinkPattern, rootShortLinkSource } from "@shor
 
 describe("Frontend routing boundaries", () => {
   it("loads the same routing rules in CommonJS and ESM without require(ESM) support", () => {
-    // Run outside Vitest's module transform to match older serverless runtimes.
+    // เปิด Node process แยก → โหลดแพ็กเกจทั้ง require/import → รับ JSON snapshot → ตรวจว่ากฎเท่ากันทั้งสองแบบ
     const output = execFileSync(process.execPath, ["--no-experimental-require-module", "-e", `
       const cjs = require("@short/routing");
       import("@short/routing").then((esm) => {
@@ -28,6 +29,7 @@ describe("Frontend routing boundaries", () => {
     expect(cjs).toEqual(esm);
     expect(cjs).toMatchObject({ reserved: true, short: true, page: false, paths: ["/hello", "/s/login"] });
   });
+  // อ่าน Route หน้า React → ดึงชื่อจาก path → ส่งเข้า isReservedName; ต้องเป็นชื่อสงวนทั้งหมด
   it("reserves every page declared by the frontend router", () => {
     const app = readFileSync(resolve("frontend/src/App.tsx"), "utf8");
     const pages = [...app.matchAll(/path="\/([^"/:*]+)/g)].map((match) => match[1]);
